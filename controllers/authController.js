@@ -3,6 +3,7 @@ const User = require("./../models/userModel");
 const catchAsync = require("./../utils/catchAsync");
 const bcrypt = require("bcrypt");
 const AppError = require("../utils/appError");
+const validator = require("email-validator");
 const { v4: uuidv4 } = require("uuid");
 
 const signToken = (id) => {
@@ -37,7 +38,36 @@ const createSendToken = (user, statusCode, res) => {
 
 exports.signup = catchAsync(async (req, res, next) => {
   let newUser = { ...req.body };
+  if (!newUser.email) {
+    return next(new AppError("Please provide your email", 400));
+  }
+  if (!newUser.password) {
+    return next(new AppError("Please provide your password", 400));
+  }
+  if (!newUser.passwordConfirm) {
+    return next(new AppError("Please provide your password confirm", 400));
+  }
+
+  if (!newUser.role) {
+    return next(new AppError("Please provide your role", 400));
+  }
+
+  if (!validator.validate(newUser.email)) {
+    return next(new AppError("Please provide a valid email", 400));
+  }
+
+  const x = await User.where("email", "==", newUser.email).get();
+
+  if (!x.empty) {
+    return next(new AppError("Email already exists", 400));
+  }
+
+  if (newUser.password != newUser.passwordConfirm) {
+    return next(new AppError("Passwords are not the same!", 400));
+  }
+
   newUser.password = await bcrypt.hash(newUser.password, 12);
+  delete newUser.passwordConfirm;
   const userID = uuidv4();
   await User.doc(userID).set(newUser);
   newUser.id = userID;
@@ -49,7 +79,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
   // 1) Check if email and password exist
   if (!email || !password) {
-    next(new AppError("Please provide email and password", 400));
+    return next(new AppError("Please provide email and password", 400));
   }
 
   // 2) Check if user exists && password is correct

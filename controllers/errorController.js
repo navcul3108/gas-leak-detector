@@ -5,6 +5,8 @@ const sendErrorDev = (err, res) => {
     message: err.message,
     stack: err.stack,
   });
+  res.end();
+  res.status(404).end();
 };
 
 module.exports = (err, req, res, next) => {
