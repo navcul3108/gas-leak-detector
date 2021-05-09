@@ -35,9 +35,8 @@ const createSendToken = (user, statusCode, res) => {
 
 exports.signup = catchAsync(async (req, res, next) => {
   let newUser = { ...req.body };
-  newUser.password = await bcrypt.hash(this.password, 12);
-  console.log(newUser.password);
-  const newUserID = await User.add(req.body);
+  newUser.password = await bcrypt.hash(newUser.password, 12);
+  const newUserID = await User.add(newUser);
   newUser.id = newUserID.id;
   createSendToken(newUser, 201, res);
 });
