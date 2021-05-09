@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("./../models/userModel");
 const catchAsync = require("./../utils/catchAsync");
+const bcrypt = require("bcrypt");
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -22,20 +23,21 @@ const createSendToken = (user, statusCode, res) => {
   user.password = undefined;
 
   res.cookie("jwt", token, cookieOption);
-
   res.status(statusCode).json({
     status: "success",
     token,
     data: {
-      user,
+      name: user.name,
+      email: user.email,
     },
   });
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
-  console.log(process.env.JWT_SECRET);
-  const newUser = await User.add(req.body);
-  console.log(newUser.id);
-
+  let newUser = { ...req.body };
+  newUser.password = await bcrypt.hash(this.password, 12);
+  console.log(newUser.password);
+  const newUserID = await User.add(req.body);
+  newUser.id = newUserID.id;
   createSendToken(newUser, 201, res);
 });
