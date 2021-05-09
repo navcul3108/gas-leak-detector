@@ -2,6 +2,8 @@ const jwt = require("jsonwebtoken");
 const User = require("./../models/userModel");
 const catchAsync = require("./../utils/catchAsync");
 const bcrypt = require("bcrypt");
+const AppError = require("../utils/appError");
+const { v4: uuidv4 } = require("uuid");
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -36,7 +38,31 @@ const createSendToken = (user, statusCode, res) => {
 exports.signup = catchAsync(async (req, res, next) => {
   let newUser = { ...req.body };
   newUser.password = await bcrypt.hash(newUser.password, 12);
-  const newUserID = await User.add(newUser);
-  newUser.id = newUserID.id;
+  const userID = uuidv4();
+  await User.doc(userID).set(newUser);
+  newUser.id = userID;
   createSendToken(newUser, 201, res);
+});
+
+exports.login = catchAsync(async (req, res, next) => {
+  const { email, password } = req.body;
+
+  // 1) Check if email and password exist
+  if (!email || !password) {
+    next(new AppError("Please provide email and password", 400));
+  }
+
+  // 2) Check if user exists && password is correct
+  const snapshot = await User.where("email", "==", email).get();
+  if (snapshot.empty)
+    return next(new AppError("Incorrect email or password", 401));
+
+  let user;
+  snapshot.forEach((x) => (user = x.data()));
+
+  if (!(await bcrypt.compare(password, user.password)))
+    return next(new AppError("Incorrect email or password", 401));
+
+  // 3) If everything is OK, send token to client
+  createSendToken(user, 200, res);
 });
