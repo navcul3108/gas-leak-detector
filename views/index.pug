@@ -5,7 +5,7 @@ head
   meta(name='description' content='')
   meta(name='author' content='')
   link(href='https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap' rel='stylesheet')
-  title Sixteen Clothing HTML Template
+  title HCMUT
   // Bootstrap core CSS
   link(href='vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
   //
@@ -28,19 +28,19 @@ header
     .container
       a.navbar-brand(href='index')
         h2
-          | Sixteen 
-          em Clothing
+          |Hệ thống phát hiện 
+          em rò rỉ khí Gas
       button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
         span.navbar-toggler-icon
       #navbarResponsive.collapse.navbar-collapse
         ul.navbar-nav.ml-auto
           if user
             li.nav-item.active
-            a.nav-link(href='index')
-              | Trang ch&#x1EE7;
+            a.nav-link(href='feed')
+              | Thiết bị
             li.nav-item
               a.nav-link(href='#')
-                span=user.name.split(' ')[0]
+                span=user.name
             li.nav-item
               a.nav-link(href='logout')  &Dstrok;&abreve;ng xu&#x1EA5;t
           else
@@ -60,45 +60,34 @@ header
   .owl-banner.owl-carousel
     .banner-item-01
       .text-content
-        h4 Best Offer
-        h2 New Arrivals On Sale
+        h2 Cảnh báo chính xác
     .banner-item-02
       .text-content
-        h4 Flash Deals
-        h2 Get your best products
+        h2 Cảnh báo kịp thời
     .banner-item-03
       .text-content
-        h4 Last Minute
-        h2 Grab last minute deals
+        h2 Hiển thị dữ liệu thường xuyên
 // Banner Ends Here
 .best-features
   .container
     .row
       .col-md-12
         .section-heading
-          h2 About Sixteen Clothing
+          h2 Về hệ thống cảnh báo khi gas
       .col-md-6
         .left-content
-          h4 Looking for the best products?
-          p
-            a(rel='nofollow' href='https://templatemo.com/tm-546-sixteen-clothing' target='_parent') This template
-            |                 is free to use for your business websites. However, you have no
-            |                 permission to redistribute the downloadable ZIP file on any
-            |                 template collection website.
-            a(rel='nofollow' href='https://templatemo.com/contact') Contact us
-            |                 for more info.
+          
+          p Hệ thống hiển thị nồng độ khí gas và nhiệt độ nhằm đưa ra cảnh báo kịp thời khi nồng độ vượt quá chỉ số an toàn cho phép, có nguy cơ gây nguy hiểm cao. Ngoài ra, hệ thống cũng hỗ trợ mở thông gió, đóng van gas và phun nước trong trường hợp cần thiết
+
           ul.featured-list
             li
-              a(href='#') Lorem ipsum dolor sit amet
+              span Ngày nay, trong các hộ gia đình, doanh nghiệp nhà hàng, phương tiện giao thông, khí gas được sử dụng phổ biến trong việc cung cấp nhiệt, cung cấp nhiên liệu cho các phương tiên giao thông.
             li
-              a(href='#') Consectetur an adipisicing elit
+              span Tuy nhiên, việc sử dụng khí gas càng phổ biến sẽ kéo theo đó nguy cơ, cùng các vụ cháy nổ do khí gas cũng tăng cao bởi vì gas rất dễ bắt lửa. Đặc biệt, khi khí gas bị rò rỉ trong các hộ gia đình, ở nồng độ cao có thể dễ gây ngộ độc cho người hít phải.
             li
-              a(href='#') It aquecorporis nulla aspernatur
+              span Có thể thấy, các vụ cháy nổ do rò rỉ khí gas thường gây thiệt hại nặng nề về tài sản và con người, mà nguyên nhân phổ biến thường là do van bị hở, đường dẫn bị thủng hoặc đứt.
             li
-              a(href='#') Corporis, omnis doloremque
-            li
-              a(href='#') Non cum id reprehenderit
-          a.filled-button(href='about.html') Read More
+              span Hơn nữa, rò rỉ khí gas thường xảy ra ở các khu vực kho, hầm, nơi ít người qua lại và khi phát hiện ra thường thì đã quá muộn.
       .col-md-6
         .right-image
           img(src='assets/images/feature-image.jpg' alt='')
@@ -108,8 +97,7 @@ footer
       .col-md-12
         .inner-content
           p
-            | Copyright &copy; 2020 Sixteen Clothing Co., Ltd. - Design:
-            a(rel='nofollow noopener' href='https://templatemo.com' target='_blank') TemplateMo
+            | Copyright &copy; 2020 HCMUT
 // Bootstrap core JavaScript
 script(src='vendor/jquery/jquery.min.js')
 script(src='vendor/bootstrap/js/bootstrap.bundle.min.js')
@@ -117,6 +105,7 @@ script(src='vendor/bootstrap/js/bootstrap.bundle.min.js')
 script(src='assets/js/custom.js')
 script(src='assets/js/owl.js')
 script(src='assets/js/slick.js')
+script(src='assets/js/logout.js')
 script(src='assets/js/isotope.js')
 script(src='assets/js/accordions.js')
 script(language='text/Javascript').

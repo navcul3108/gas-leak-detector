@@ -24,16 +24,15 @@ const createSendToken = (user, statusCode, res) => {
   };
 
   if (process.env.NODE_ENV === "production") cookieOption.secure = true;
-
-  user.data().password = undefined;
+  user.password = undefined;
 
   res.cookie("jwt", token, cookieOption);
   res.status(statusCode).json({
     status: "success",
     token,
     data: {
-      name: user.data().name,
-      email: user.data().email,
+      name: user.name,
+      email: user.email,
     },
   });
 };
@@ -48,10 +47,6 @@ exports.signup = catchAsync(async (req, res, next) => {
   }
   if (!newUser.passwordConfirm) {
     return next(new AppError("Please provide your password confirm", 400));
-  }
-
-  if (!newUser.role) {
-    return next(new AppError("Please provide your role", 400));
   }
 
   if (!validator.validate(newUser.email)) {
@@ -90,14 +85,27 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError("Incorrect email or password", 401));
 
   let user;
-  snapshot.forEach((x) => (user = x));
+  let newUser = {};
+  snapshot.forEach((x) => {
+    user = x.data();
+    newUser["id"] = x.id;
+  });
 
-  if (!(await bcrypt.compare(password, user.data().password)))
+  if (!(await bcrypt.compare(password, user.password)))
     return next(new AppError("Incorrect email or password", 401));
 
   // 3) If everything is OK, send token to client
-  createSendToken(user, 200, res);
+  newUser = { ...newUser, ...user };
+  createSendToken(newUser, 200, res);
 });
+
+exports.logout = (req, res, next) => {
+  res.cookie("jwt", "loggedout", {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+  next();
+};
 
 exports.protect = catchAsync(async (req, res, next) => {
   // 1) Getting token and check of it's there
@@ -145,16 +153,23 @@ exports.protect = catchAsync(async (req, res, next) => {
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
   // 1) Getting token and check of it's there
   if (req.cookies.jwt) {
-    token = req.cookies.jwt;
-    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-    const userRef = User.doc(decoded.id);
-    const user = await userRef.get();
-    if (!user.exists) {
+    try {
+      token = req.cookies.jwt;
+      const decoded = await promisify(jwt.verify)(
+        token,
+        process.env.JWT_SECRET
+      );
+      const userRef = User.doc(decoded.id);
+      const user = await userRef.get();
+      if (!user.exists) {
+        return next();
+      }
+      let currentUser = { ...user.data(), id: user.id };
+      res.locals.user = currentUser;
+      return next();
+    } catch (error) {
       return next();
     }
-    let currentUser = { ...user.data(), id: user.id };
-    res.locals.user = currentUser;
-    return next();
   }
-  next();
+  return next();
 });

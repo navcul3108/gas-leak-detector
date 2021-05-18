@@ -12,12 +12,15 @@ router.get("/signup", function (req, res, next) {
   res.render("signup");
 });
 
+router.post("/signup", authController.signup);
+
 router.get("/login", function (req, res, next) {
   res.render("login");
 });
 
-router.post("/login", authController.login, function (req, res, next) {
-  res.redirect("feed");
+router.post("/login", authController.login);
+router.get("/logout", authController.logout, (req, res, next) => {
+  res.redirect("index");
 });
 
 router.get("/contact", function (req, res, next) {

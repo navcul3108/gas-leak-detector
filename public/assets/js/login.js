@@ -15,14 +15,15 @@ const login = async (email, password) => {
       alert("Đăng nhập thành công!");
       window.setTimeout(() => {
         location.assign("/feed");
-      }, 1500);
+      }, 500);
     }
   } catch (err) {
-    console.log(err.response.data);
+    alert(err.response.data.message);
   }
 };
 
 var form = new Validator("#register-form");
+
 form.onSubmit = function (data) {
   login(data.email, data.password);
 };

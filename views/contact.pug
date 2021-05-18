@@ -5,7 +5,7 @@ head
   meta(name='description' content='')
   meta(name='author' content='')
   link(href='https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap' rel='stylesheet')
-  title Sixteen Clothing - About Page
+  title HCMUT
   // Bootstrap core CSS
   link(href='vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
   //
@@ -28,68 +28,53 @@ header
     .container
       a.navbar-brand(href='index')
         h2
-          | Sixteen 
-          em Clothing
+          |Hệ thống phát hiện 
+          em rò rỉ khí Gas
       button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
         span.navbar-toggler-icon
       #navbarResponsive.collapse.navbar-collapse
         ul.navbar-nav.ml-auto
-          li.nav-item
-            a.nav-link(href='index')
-              | Trang ch&#x1EE7;
-              span.sr-only (current)
-          li.nav-item
-            a.nav-link(href='signup') &Dstrok;&abreve;ng K&yacute;
-          li.nav-item
-            a.nav-link(href='login') &Dstrok;&abreve;ng Nh&#x1EAD;p
-          li.nav-item.active
-            a.nav-link(href='contact') V&#x1EC1; ch&uacute;ng t&ocirc;i
+          if user
+            li.nav-item.active
+            a.nav-link(href='feed')
+              | Thiết bị
+            li.nav-item
+              a.nav-link(href='#')
+                span=user.name
+            li.nav-item
+              a.nav-link(href='logout')  &Dstrok;&abreve;ng xu&#x1EA5;t
+          else
+            li.nav-item
+              a.nav-link(href='index')
+                | Trang ch&#x1EE7;
+                span.sr-only (current)
+            li.nav-item
+              a.nav-link(href='signup') &Dstrok;&abreve;ng K&yacute;
+            li.nav-item
+              a.nav-link(href='login') &Dstrok;&abreve;ng Nh&#x1EAD;p
+            li.nav-item.active
+              a.nav-link(href='contact') V&#x1EC1; ch&uacute;ng t&ocirc;i
 // Page Content
 .page-heading.about-heading.header-text
   .container
     .row
       .col-md-12
         .text-content
-          h4 about us
-          h2 our company
+          h4 về chúng tôi
+          h2 Nhóm 9 - L03 - HCMUT
 .best-features.about-features
   .container
     .row
       .col-md-12
         .section-heading
-          h2 Our Background
+          h2 Chúng tôi là
       .col-md-6
         .right-image
           img(src='assets/images/feature-image.jpg' alt='')
       .col-md-6
         .left-content
-          h4 Who we are &amp; What we do?
-          p
-            | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed
-            | voluptate nihil eum consectetur similique? Consectetur, quod,
-            | incidunt, harum nisi dolores delectus reprehenderit voluptatem
-            | perferendis dicta dolorem non blanditiis ex fugiat. Lorem ipsum
-            | dolor sit amet, consectetur adipisicing elit.
-            br
-            br
-            | Lorem
-            |                 ipsum dolor sit amet, consectetur adipisicing elit. Et,
-            |                 consequuntur, modi mollitia corporis ipsa voluptate corrupti eum
-            |                 ratione ex ea praesentium quibusdam? Aut, in eum facere corrupti
-            |                 necessitatibus perspiciatis quis.
-          ul.social-icons
-            li
-              a(href='#')
-                i.fa.fa-facebook
-            li
-              a(href='#')
-                i.fa.fa-twitter
-            li
-              a(href='#')
-                i.fa.fa-linkedin
-            li
-              a(href='#')
-                i.fa.fa-behance
+          h4 Chúng tôi là ai?
+          p Chúng tôi là sinh viên năm 3 ngành khoa học máy tính trường đại học Bách Khoa
 .team-members
   .container
     .row
@@ -99,12 +84,12 @@ header
       .col-md-4
         .team-member
           .thumb-container
-            img(src='assets/images/team_01.jpg' alt='')
+            //- img(src='assets/images/team_01.jpg' alt='')
             .hover-effect
               .hover-content
                 ul.social-icons
                   li
-                    a(href='#')
+                    a(href='https://www.facebook.com/HGKhang/')
                       i.fa.fa-facebook
                   li
                     a(href='#')
@@ -116,202 +101,24 @@ header
                     a(href='#')
                       i.fa.fa-behance
           .down-content
-            h4 Johnny William
-            span CO-Founder
-            p
-              | Lorem ipsum dolor sit amet, consectetur adipisicing itaque
-              | corporis nulla.
-      .col-md-4
-        .team-member
-          .thumb-container
-            img(src='assets/images/team_02.jpg' alt='')
-            .hover-effect
-              .hover-content
-                ul.social-icons
-                  li
-                    a(href='#')
-                      i.fa.fa-facebook
-                  li
-                    a(href='#')
-                      i.fa.fa-twitter
-                  li
-                    a(href='#')
-                      i.fa.fa-linkedin
-                  li
-                    a(href='#')
-                      i.fa.fa-behance
-          .down-content
-            h4 Karry Pitcher
-            span Product Expert
-            p
-              | Lorem ipsum dolor sit amet, consectetur adipisicing itaque
-              | corporis nulla.
-      .col-md-4
-        .team-member
-          .thumb-container
-            img(src='assets/images/team_03.jpg' alt='')
-            .hover-effect
-              .hover-content
-                ul.social-icons
-                  li
-                    a(href='#')
-                      i.fa.fa-facebook
-                  li
-                    a(href='#')
-                      i.fa.fa-twitter
-                  li
-                    a(href='#')
-                      i.fa.fa-linkedin
-                  li
-                    a(href='#')
-                      i.fa.fa-behance
-          .down-content
-            h4 Michael Soft
-            span Chief Marketing
-            p
-              | Lorem ipsum dolor sit amet, consectetur adipisicing itaque
-              | corporis nulla.
-      .col-md-4
-        .team-member
-          .thumb-container
-            img(src='assets/images/team_04.jpg' alt='')
-            .hover-effect
-              .hover-content
-                ul.social-icons
-                  li
-                    a(href='#')
-                      i.fa.fa-facebook
-                  li
-                    a(href='#')
-                      i.fa.fa-twitter
-                  li
-                    a(href='#')
-                      i.fa.fa-linkedin
-                  li
-                    a(href='#')
-                      i.fa.fa-behance
-          .down-content
-            h4 Mary Cool
-            span Product Specialist
-            p
-              | Lorem ipsum dolor sit amet, consectetur adipisicing itaque
-              | corporis nulla.
-      .col-md-4
-        .team-member
-          .thumb-container
-            img(src='assets/images/team_05.jpg' alt='')
-            .hover-effect
-              .hover-content
-                ul.social-icons
-                  li
-                    a(href='#')
-                      i.fa.fa-facebook
-                  li
-                    a(href='#')
-                      i.fa.fa-twitter
-                  li
-                    a(href='#')
-                      i.fa.fa-linkedin
-                  li
-                    a(href='#')
-                      i.fa.fa-behance
-          .down-content
-            h4 George Walker
-            span Product Photographer
-            p
-              | Lorem ipsum dolor sit amet, consectetur adipisicing itaque
-              | corporis nulla.
-      .col-md-4
-        .team-member
-          .thumb-container
-            img(src='assets/images/team_06.jpg' alt='')
-            .hover-effect
-              .hover-content
-                ul.social-icons
-                  li
-                    a(href='#')
-                      i.fa.fa-facebook
-                  li
-                    a(href='#')
-                      i.fa.fa-twitter
-                  li
-                    a(href='#')
-                      i.fa.fa-linkedin
-                  li
-                    a(href='#')
-                      i.fa.fa-behance
-          .down-content
-            h4 Kate Town
-            span General Manager
-            p
-              | Lorem ipsum dolor sit amet, consectetur adipisicing itaque
-              | corporis nulla.
-.services
-  .container
-    .row
-      .col-md-4
-        .service-item
-          .icon
-            i.fa.fa-gear
-          .down-content
-            h4 Product Management
-            p
-              | Lorem ipsum dolor sit amet, consectetur an adipisicing elit.
-              | Itaque, corporis nulla at quia quaerat.
-            a.filled-button(href='#') Read More
-      .col-md-4
-        .service-item
-          .icon
-            i.fa.fa-gear
-          .down-content
-            h4 Customer Relations
-            p
-              | Lorem ipsum dolor sit amet, consectetur an adipisicing elit.
-              | Itaque, corporis nulla at quia quaerat.
-            a.filled-button(href='#') Details
-      .col-md-4
-        .service-item
-          .icon
-            i.fa.fa-gear
-          .down-content
-            h4 Global Collection
-            p
-              | Lorem ipsum dolor sit amet, consectetur an adipisicing elit.
-              | Itaque, corporis nulla at quia quaerat.
-            a.filled-button(href='#') Read More
-.happy-clients
-  .container
-    .row
-      .col-md-12
-        .section-heading
-          h2 Happy Partners
-      .col-md-12
-        .owl-clients.owl-carousel
-          .client-item
-            img(src='assets/images/client-01.png' alt='1')
-          .client-item
-            img(src='assets/images/client-01.png' alt='2')
-          .client-item
-            img(src='assets/images/client-01.png' alt='3')
-          .client-item
-            img(src='assets/images/client-01.png' alt='4')
-          .client-item
-            img(src='assets/images/client-01.png' alt='5')
-          .client-item
-            img(src='assets/images/client-01.png' alt='6')
+            h4 Hoàng Gia Khang
+            span Thành viên
+            p Sinh viên năm 3 - HCMUT
+              
+      
 footer
   .container
     .row
       .col-md-12
         .inner-content
           p
-            | Copyright &copy; 2020 Sixteen Clothing Co., Ltd. - Design:
-            a(rel='nofollow noopener' href='https://templatemo.com' target='_blank') TemplateMo
+            | Copyright &copy; 2020 HCMUT
 // Bootstrap core JavaScript
 script(src='vendor/jquery/jquery.min.js')
 script(src='vendor/bootstrap/js/bootstrap.bundle.min.js')
 // Additional Scripts
 script(src='assets/js/custom.js')
+script(src='assets/js/logout.js')
 script(src='assets/js/owl.js')
 script(src='assets/js/slick.js')
 script(src='assets/js/isotope.js')

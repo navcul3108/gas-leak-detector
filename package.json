@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "watch:js": "parcel watch ./public/assets/js/index.js --out-dir ./public/assets/js --out-file bundle.js",
+    "build:js": "parcel watch ./public/assets/js/index.js --out-dir ./public/assets/js --out-file bundle.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -19,5 +21,8 @@
     "pug": "2.0.0-beta11",
     "util-promisify": "^2.1.0",
     "util-promisifyall": "^1.0.6"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
   }
 }
