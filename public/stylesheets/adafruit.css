@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+
+body{
+    font-family: "Roboto";
+}
+
+.adafruit-io{
+    background-color: #d8e3e7;
+    padding: 2em;
+}
+
+.url-area{
+    width: 50%;
+    margin: auto;
+    border-radius: 1em;
+}
+
+.posting-data{
+    margin: 3em;
+    width: 40%;
+    border: 1px solid #132c33;
+    color: #132c33;
+    font-size: 16px;
+}
+
+.input-area{
+    padding: 1em;
+    border-bottom: 1px solid #51c4d3;
+    margin: 0.75em;
+}
