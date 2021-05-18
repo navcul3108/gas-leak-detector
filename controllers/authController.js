@@ -6,6 +6,8 @@ const AppError = require("../utils/appError");
 const validator = require("email-validator");
 const { v4: uuidv4 } = require("uuid");
 
+const promisify = require("util-promisify");
+
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
@@ -23,15 +25,15 @@ const createSendToken = (user, statusCode, res) => {
 
   if (process.env.NODE_ENV === "production") cookieOption.secure = true;
 
-  user.password = undefined;
+  user.data().password = undefined;
 
   res.cookie("jwt", token, cookieOption);
   res.status(statusCode).json({
     status: "success",
     token,
     data: {
-      name: user.name,
-      email: user.email,
+      name: user.data().name,
+      email: user.data().email,
     },
   });
 };
@@ -88,11 +90,71 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError("Incorrect email or password", 401));
 
   let user;
-  snapshot.forEach((x) => (user = x.data()));
+  snapshot.forEach((x) => (user = x));
 
-  if (!(await bcrypt.compare(password, user.password)))
+  if (!(await bcrypt.compare(password, user.data().password)))
     return next(new AppError("Incorrect email or password", 401));
 
   // 3) If everything is OK, send token to client
   createSendToken(user, 200, res);
+});
+
+exports.protect = catchAsync(async (req, res, next) => {
+  // 1) Getting token and check of it's there
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    token = req.headers.authorization.split(" ")[1];
+  } else if (req.cookies.jwt) {
+    token = req.cookies.jwt;
+  }
+  if (!token) {
+    return next(
+      new AppError("You are not logged in! Please log in to get access!!!", 401)
+    );
+  }
+
+  // 2) Verification token
+  // const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+
+  // 3) Check if user still exists
+  // const currentUser = await User.findById(decoded.id);
+  // if (!currentUser) {
+  //   return next(
+  //     new AppError(
+  //       "The user belonging to this token does no longer exist.",
+  //       401
+  //     )
+  //   );
+  // }
+
+  // // 4) Check if user changed password after the token was issued
+  // if (currentUser.changedPasswordAfter(decoded.iat)) {
+  //   return next(
+  //     new AppError("User recently changed password! Please log in again", 401)
+  //   );
+  // }
+
+  // GRANT ACCESS TO PROTECTED ROUTE
+  // req.user = currentUser;
+  next();
+});
+
+exports.isLoggedIn = catchAsync(async (req, res, next) => {
+  // 1) Getting token and check of it's there
+  if (req.cookies.jwt) {
+    token = req.cookies.jwt;
+    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+    const userRef = User.doc(decoded.id);
+    const user = await userRef.get();
+    if (!user.exists) {
+      return next();
+    }
+    let currentUser = { ...user.data(), id: user.id };
+    res.locals.user = currentUser;
+    return next();
+  }
+  next();
 });

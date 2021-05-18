@@ -8,6 +8,9 @@ const authController = require("../controllers/authController");
 router.post("/signup", authController.signup);
 // router.post("/login", authController.login);
 
-router.get("/", userController.getAllUsers);
+router.get("/", function (req, res, next) {
+  res.render("error");
+});
+// userController.getAllUsers);
 
 module.exports = router;

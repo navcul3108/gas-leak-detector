@@ -1,5 +1,132 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  meta(name='description' content='')
+  meta(name='author' content='')
+  link(href='https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap' rel='stylesheet')
+  title Sixteen Clothing HTML Template
+  // Bootstrap core CSS
+  link(href='vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
+  //
+    TemplateMo 546 Sixteen Clothing
+    https://templatemo.com/tm-546-sixteen-clothing
+  // Additional CSS Files
+  link(rel='stylesheet' href='stylesheet')
+  link(rel='stylesheet' href='assets/css/templatemo-sixteen.css')
+  link(rel='stylesheet' href='assets/css/owl.css')
+// ***** Preloader Start *****
+#preloader
+  .jumper
+    div
+    div
+    div
+// ***** Preloader End *****
+// Header
+header
+  nav.navbar.navbar-expand-lg
+    .container
+      a.navbar-brand(href='index')
+        h2
+          | Sixteen 
+          em Clothing
+      button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      #navbarResponsive.collapse.navbar-collapse
+        ul.navbar-nav.ml-auto
+          if user
+            li.nav-item.active
+            a.nav-link(href='index')
+              | Trang ch&#x1EE7;
+            li.nav-item
+              a.nav-link(href='#')
+                span=user.name.split(' ')[0]
+            li.nav-item
+              a.nav-link(href='logout')  &Dstrok;&abreve;ng xu&#x1EA5;t
+          else
+            li.nav-item.active
+            a.nav-link(href='index')
+              | Trang ch&#x1EE7;
+              span.sr-only (current)
+            li.nav-item
+              a.nav-link(href='signup') &Dstrok;&abreve;ng k&yacute;
+            li.nav-item
+              a.nav-link(href='login') &Dstrok;&abreve;ng nh&#x1EAD;p
+            li.nav-item
+              a.nav-link(href='contact') V&#x1EC1; ch&uacute;ng t&ocirc;i
+// Page Content
+// Banner Starts Here
+.banner.header-text
+  .owl-banner.owl-carousel
+    .banner-item-01
+      .text-content
+        h4 Best Offer
+        h2 New Arrivals On Sale
+    .banner-item-02
+      .text-content
+        h4 Flash Deals
+        h2 Get your best products
+    .banner-item-03
+      .text-content
+        h4 Last Minute
+        h2 Grab last minute deals
+// Banner Ends Here
+.best-features
+  .container
+    .row
+      .col-md-12
+        .section-heading
+          h2 About Sixteen Clothing
+      .col-md-6
+        .left-content
+          h4 Looking for the best products?
+          p
+            a(rel='nofollow' href='https://templatemo.com/tm-546-sixteen-clothing' target='_parent') This template
+            |                 is free to use for your business websites. However, you have no
+            |                 permission to redistribute the downloadable ZIP file on any
+            |                 template collection website.
+            a(rel='nofollow' href='https://templatemo.com/contact') Contact us
+            |                 for more info.
+          ul.featured-list
+            li
+              a(href='#') Lorem ipsum dolor sit amet
+            li
+              a(href='#') Consectetur an adipisicing elit
+            li
+              a(href='#') It aquecorporis nulla aspernatur
+            li
+              a(href='#') Corporis, omnis doloremque
+            li
+              a(href='#') Non cum id reprehenderit
+          a.filled-button(href='about.html') Read More
+      .col-md-6
+        .right-image
+          img(src='assets/images/feature-image.jpg' alt='')
+footer
+  .container
+    .row
+      .col-md-12
+        .inner-content
+          p
+            | Copyright &copy; 2020 Sixteen Clothing Co., Ltd. - Design:
+            a(rel='nofollow noopener' href='https://templatemo.com' target='_blank') TemplateMo
+// Bootstrap core JavaScript
+script(src='vendor/jquery/jquery.min.js')
+script(src='vendor/bootstrap/js/bootstrap.bundle.min.js')
+// Additional Scripts
+script(src='assets/js/custom.js')
+script(src='assets/js/owl.js')
+script(src='assets/js/slick.js')
+script(src='assets/js/isotope.js')
+script(src='assets/js/accordions.js')
+script(language='text/Javascript').
+  cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+  function clearField(t) {
+  //declaring the array outside of the
+  if (!cleared[t.id]) {
+  // function makes it static and global
+  cleared[t.id] = 1; // you could use true and false, but that's more typing
+  t.value = ""; // with more chance of typos
+  t.style.color = "#fff";
+  }
+  }
