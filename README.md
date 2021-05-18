@@ -5,6 +5,9 @@
 ### Test with exist data
 `node ./test-firebase.js`
 
+### Debug with nodemon, restart server whenever there is a change on JS files
+`npm run test`
+
 ### Adafruit feed links
 |Device|Feeds link|
 |------|----------|
