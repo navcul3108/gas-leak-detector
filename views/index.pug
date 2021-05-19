@@ -1,123 +1,110 @@
-doctype html
-head
-  meta(charset='utf-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
-  meta(name='description' content='')
-  meta(name='author' content='')
+extends layout
+
+block content
   link(rel="icon" href="https://seeklogo.com/images/D/dota-2-logo-A8CAC9B4C9-seeklogo.com.png" type="image/x-icon")
   link(href='https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap' rel='stylesheet')
-  title HCMUT
-  // Bootstrap core CSS
-  link(href='vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
-  //
-    TemplateMo 546 Sixteen Clothing
-    https://templatemo.com/tm-546-sixteen-clothing
-  // Additional CSS Files
   link(rel='stylesheet' href='stylesheet')
   link(rel='stylesheet' href='assets/css/templatemo-sixteen.css')
   link(rel='stylesheet' href='assets/css/owl.css')
-// ***** Preloader Start *****
-#preloader
-  .jumper
-    div
-    div
-    div
-// ***** Preloader End *****
-// Header
-header
-  nav.navbar.navbar-expand-lg
+  // ***** Preloader Start *****
+  #preloader
+    .jumper
+      div
+      div
+      div
+  // ***** Preloader End *****
+  // Header
+  header
+    nav.navbar.navbar-expand-lg
+      .container
+        img(src='https://seeklogo.com/images/D/dota-2-logo-A8CAC9B4C9-seeklogo.com.png' style="width:50px;height:50px;margin-left:-30px;margin-right:60px" alt='logo')
+        a.navbar-brand(href='index')
+          h2
+            |Hệ thống phát hiện 
+            em rò rỉ khí Gas
+        button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        #navbarResponsive.collapse.navbar-collapse
+          ul.navbar-nav.ml-auto
+            if user
+              li.nav-item.active
+              a.nav-link(href='feed')
+                | Thiết bị
+              li.nav-item
+                a.nav-link(href='#')
+                  span=user.name
+              li.nav-item
+                a.nav-link(href='logout')  &Dstrok;&abreve;ng xu&#x1EA5;t
+            else
+              li.nav-item.active
+              a.nav-link(href='index')
+                | Trang ch&#x1EE7;
+                span.sr-only (current)
+              li.nav-item
+                a.nav-link(href='signup') &Dstrok;&abreve;ng k&yacute;
+              li.nav-item
+                a.nav-link(href='login') &Dstrok;&abreve;ng nh&#x1EAD;p
+              li.nav-item
+                a.nav-link(href='contact') V&#x1EC1; ch&uacute;ng t&ocirc;i
+  // Page Content
+  // Banner Starts Here
+  .banner.header-text
+    .owl-banner.owl-carousel
+      .banner-item-01
+        .text-content
+          h2 Cảnh báo chính xác
+      .banner-item-02
+        .text-content
+          h2 Cảnh báo kịp thời
+      .banner-item-03
+        .text-content
+          h2 Hiển thị dữ liệu thường xuyên
+  // Banner Ends Here
+  .best-features
     .container
-      img(src='https://seeklogo.com/images/D/dota-2-logo-A8CAC9B4C9-seeklogo.com.png' style="width:50px;height:50px;margin-left:-30px;margin-right:60px" alt='logo')
-      a.navbar-brand(href='index')
-        h2
-          |Hệ thống phát hiện 
-          em rò rỉ khí Gas
-      button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
-        span.navbar-toggler-icon
-      #navbarResponsive.collapse.navbar-collapse
-        ul.navbar-nav.ml-auto
-          if user
-            li.nav-item.active
-            a.nav-link(href='feed')
-              | Thiết bị
-            li.nav-item
-              a.nav-link(href='#')
-                span=user.name
-            li.nav-item
-              a.nav-link(href='logout')  &Dstrok;&abreve;ng xu&#x1EA5;t
-          else
-            li.nav-item.active
-            a.nav-link(href='index')
-              | Trang ch&#x1EE7;
-              span.sr-only (current)
-            li.nav-item
-              a.nav-link(href='signup') &Dstrok;&abreve;ng k&yacute;
-            li.nav-item
-              a.nav-link(href='login') &Dstrok;&abreve;ng nh&#x1EAD;p
-            li.nav-item
-              a.nav-link(href='contact') V&#x1EC1; ch&uacute;ng t&ocirc;i
-// Page Content
-// Banner Starts Here
-.banner.header-text
-  .owl-banner.owl-carousel
-    .banner-item-01
-      .text-content
-        h2 Cảnh báo chính xác
-    .banner-item-02
-      .text-content
-        h2 Cảnh báo kịp thời
-    .banner-item-03
-      .text-content
-        h2 Hiển thị dữ liệu thường xuyên
-// Banner Ends Here
-.best-features
-  .container
-    .row
-      .col-md-12
-        .section-heading
-          h2 Về hệ thống cảnh báo khi gas
-      .col-md-6
-        .left-content
-          
-          p Hệ thống hiển thị nồng độ khí gas và nhiệt độ nhằm đưa ra cảnh báo kịp thời khi nồng độ vượt quá chỉ số an toàn cho phép, có nguy cơ gây nguy hiểm cao. Ngoài ra, hệ thống cũng hỗ trợ mở thông gió, đóng van gas và phun nước trong trường hợp cần thiết
+      .row
+        .col-md-12
+          .section-heading
+            h2 Về hệ thống cảnh báo khi gas
+        .col-md-6
+          .left-content
+            
+            p Hệ thống hiển thị nồng độ khí gas và nhiệt độ nhằm đưa ra cảnh báo kịp thời khi nồng độ vượt quá chỉ số an toàn cho phép, có nguy cơ gây nguy hiểm cao. Ngoài ra, hệ thống cũng hỗ trợ mở thông gió, đóng van gas và phun nước trong trường hợp cần thiết
 
-          ul.featured-list
-            li
-              span Ngày nay, trong các hộ gia đình, doanh nghiệp nhà hàng, phương tiện giao thông, khí gas được sử dụng phổ biến trong việc cung cấp nhiệt, cung cấp nhiên liệu cho các phương tiên giao thông.
-            li
-              span Tuy nhiên, việc sử dụng khí gas càng phổ biến sẽ kéo theo đó nguy cơ, cùng các vụ cháy nổ do khí gas cũng tăng cao bởi vì gas rất dễ bắt lửa. Đặc biệt, khi khí gas bị rò rỉ trong các hộ gia đình, ở nồng độ cao có thể dễ gây ngộ độc cho người hít phải.
-            li
-              span Có thể thấy, các vụ cháy nổ do rò rỉ khí gas thường gây thiệt hại nặng nề về tài sản và con người, mà nguyên nhân phổ biến thường là do van bị hở, đường dẫn bị thủng hoặc đứt.
-            li
-              span Hơn nữa, rò rỉ khí gas thường xảy ra ở các khu vực kho, hầm, nơi ít người qua lại và khi phát hiện ra thường thì đã quá muộn.
-      .col-md-6
-        .right-image
-          img(src='assets/images/feature-image.jpg' alt='')
-footer
-  .container
-    .row
-      .col-md-12
-        .inner-content
-          p
-            | Copyright &copy; 2020 HCMUT
-// Bootstrap core JavaScript
-script(src='vendor/jquery/jquery.min.js')
-script(src='vendor/bootstrap/js/bootstrap.bundle.min.js')
-// Additional Scripts
-script(src='assets/js/custom.js')
-script(src='assets/js/owl.js')
-script(src='assets/js/slick.js')
-script(src='assets/js/logout.js')
-script(src='assets/js/isotope.js')
-script(src='assets/js/accordions.js')
-script(language='text/Javascript').
-  cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
-  function clearField(t) {
-  //declaring the array outside of the
-  if (!cleared[t.id]) {
-  // function makes it static and global
-  cleared[t.id] = 1; // you could use true and false, but that's more typing
-  t.value = ""; // with more chance of typos
-  t.style.color = "#fff";
-  }
-  }
+            ul.featured-list
+              li
+                span Ngày nay, trong các hộ gia đình, doanh nghiệp nhà hàng, phương tiện giao thông, khí gas được sử dụng phổ biến trong việc cung cấp nhiệt, cung cấp nhiên liệu cho các phương tiên giao thông.
+              li
+                span Tuy nhiên, việc sử dụng khí gas càng phổ biến sẽ kéo theo đó nguy cơ, cùng các vụ cháy nổ do khí gas cũng tăng cao bởi vì gas rất dễ bắt lửa. Đặc biệt, khi khí gas bị rò rỉ trong các hộ gia đình, ở nồng độ cao có thể dễ gây ngộ độc cho người hít phải.
+              li
+                span Có thể thấy, các vụ cháy nổ do rò rỉ khí gas thường gây thiệt hại nặng nề về tài sản và con người, mà nguyên nhân phổ biến thường là do van bị hở, đường dẫn bị thủng hoặc đứt.
+              li
+                span Hơn nữa, rò rỉ khí gas thường xảy ra ở các khu vực kho, hầm, nơi ít người qua lại và khi phát hiện ra thường thì đã quá muộn.
+        .col-md-6
+          .right-image
+            img(src='assets/images/feature-image.jpg' alt='')
+  footer
+    .container
+      .row
+        .col-md-12
+          .inner-content
+            p
+              | Copyright &copy; 2020 HCMUT
+  // Additional Scripts
+  script(src='assets/js/custom.js')
+  script(src='assets/js/owl.js')
+  script(src='assets/js/slick.js')
+  script(src='assets/js/logout.js')
+  script(src='assets/js/isotope.js')
+  script(src='assets/js/accordions.js')
+  script(language='text/Javascript').
+    cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+    function clearField(t) {
+    //declaring the array outside of the
+    if (!cleared[t.id]) {
+    // function makes it static and global
+    cleared[t.id] = 1; // you could use true and false, but that's more typing
+    t.value = ""; // with more chance of typos
+    t.style.color = "#fff";
+    }
+    }

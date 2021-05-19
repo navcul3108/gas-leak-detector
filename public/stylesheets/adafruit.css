@@ -7,17 +7,23 @@ body{
 .adafruit-io{
     background-color: #d8e3e7;
     padding: 2em;
+    display: flex;
+    justify-content: space-around;
 }
 
 .url-area{
     width: 50%;
     margin: auto;
     border-radius: 1em;
+    padding: 2em;
+    background-color: cyan;
+    border-radius: 1em;
 }
 
-.posting-data{
+.posting-data,
+.get-data-area{
     margin: 3em;
-    width: 40%;
+    width: 45%;
     border: 1px solid #132c33;
     color: #132c33;
     font-size: 16px;
