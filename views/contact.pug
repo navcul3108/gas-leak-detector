@@ -13,7 +13,7 @@ head
     TemplateMo 546 Sixteen Clothing
     https://templatemo.com/tm-546-sixteen-clothing
   // Additional CSS Files
-  link(rel='stylesheet' href='stylesheet')
+  link(rel='stylesheet' href='assets/css/fontawesome.css')
   link(rel='stylesheet' href='assets/css/templatemo-sixteen.css')
   link(rel='stylesheet' href='assets/css/owl.css')
 // ***** Preloader Start *****
@@ -46,53 +46,68 @@ header
             li.nav-item
               a.nav-link(href='logout')  &Dstrok;&abreve;ng xu&#x1EA5;t
           else
+            li.nav-item
+              a.nav-link(href='index')
+                | Trang ch&#x1EE7;
+                span.sr-only (current)
+            li.nav-item
+              a.nav-link(href='signup') &Dstrok;&abreve;ng K&yacute;
+            li.nav-item
+              a.nav-link(href='login') &Dstrok;&abreve;ng Nh&#x1EAD;p
             li.nav-item.active
-            a.nav-link(href='index')
-              | Trang ch&#x1EE7;
-              span.sr-only (current)
-            li.nav-item
-              a.nav-link(href='signup') &Dstrok;&abreve;ng k&yacute;
-            li.nav-item
-              a.nav-link(href='login') &Dstrok;&abreve;ng nh&#x1EAD;p
-            li.nav-item
               a.nav-link(href='contact') V&#x1EC1; ch&uacute;ng t&ocirc;i
 // Page Content
-// Banner Starts Here
-.banner.header-text
-  .owl-banner.owl-carousel
-    .banner-item-01
-      .text-content
-        h2 Cảnh báo chính xác
-    .banner-item-02
-      .text-content
-        h2 Cảnh báo kịp thời
-    .banner-item-03
-      .text-content
-        h2 Hiển thị dữ liệu thường xuyên
-// Banner Ends Here
-.best-features
+.page-heading.about-heading.header-text
+  .container
+    .row
+      .col-md-12
+        .text-content
+          h4 về chúng tôi
+          h2 Nhóm 9 - L03 - HCMUT
+.best-features.about-features
   .container
     .row
       .col-md-12
         .section-heading
-          h2 Về hệ thống cảnh báo khi gas
-      .col-md-6
-        .left-content
-          
-          p Hệ thống hiển thị nồng độ khí gas và nhiệt độ nhằm đưa ra cảnh báo kịp thời khi nồng độ vượt quá chỉ số an toàn cho phép, có nguy cơ gây nguy hiểm cao. Ngoài ra, hệ thống cũng hỗ trợ mở thông gió, đóng van gas và phun nước trong trường hợp cần thiết
-
-          ul.featured-list
-            li
-              span Ngày nay, trong các hộ gia đình, doanh nghiệp nhà hàng, phương tiện giao thông, khí gas được sử dụng phổ biến trong việc cung cấp nhiệt, cung cấp nhiên liệu cho các phương tiên giao thông.
-            li
-              span Tuy nhiên, việc sử dụng khí gas càng phổ biến sẽ kéo theo đó nguy cơ, cùng các vụ cháy nổ do khí gas cũng tăng cao bởi vì gas rất dễ bắt lửa. Đặc biệt, khi khí gas bị rò rỉ trong các hộ gia đình, ở nồng độ cao có thể dễ gây ngộ độc cho người hít phải.
-            li
-              span Có thể thấy, các vụ cháy nổ do rò rỉ khí gas thường gây thiệt hại nặng nề về tài sản và con người, mà nguyên nhân phổ biến thường là do van bị hở, đường dẫn bị thủng hoặc đứt.
-            li
-              span Hơn nữa, rò rỉ khí gas thường xảy ra ở các khu vực kho, hầm, nơi ít người qua lại và khi phát hiện ra thường thì đã quá muộn.
+          h2 Chúng tôi là
       .col-md-6
         .right-image
           img(src='assets/images/feature-image.jpg' alt='')
+      .col-md-6
+        .left-content
+          h4 Chúng tôi là ai?
+          p Chúng tôi là sinh viên năm 3 ngành khoa học máy tính trường đại học Bách Khoa
+.team-members
+  .container
+    .row
+      .col-md-12
+        .section-heading
+          h2 Our Team Members
+      .col-md-4
+        .team-member
+          .thumb-container
+            //- img(src='assets/images/team_01.jpg' alt='')
+            .hover-effect
+              .hover-content
+                ul.social-icons
+                  li
+                    a(href='https://www.facebook.com/HGKhang/')
+                      i.fa.fa-facebook
+                  li
+                    a(href='#')
+                      i.fa.fa-twitter
+                  li
+                    a(href='#')
+                      i.fa.fa-linkedin
+                  li
+                    a(href='#')
+                      i.fa.fa-behance
+          .down-content
+            h4 Hoàng Gia Khang
+            span Thành viên
+            p Sinh viên năm 3 - HCMUT
+              
+      
 footer
   .container
     .row
@@ -105,9 +120,9 @@ script(src='vendor/jquery/jquery.min.js')
 script(src='vendor/bootstrap/js/bootstrap.bundle.min.js')
 // Additional Scripts
 script(src='assets/js/custom.js')
+script(src='assets/js/logout.js')
 script(src='assets/js/owl.js')
 script(src='assets/js/slick.js')
-script(src='assets/js/logout.js')
 script(src='assets/js/isotope.js')
 script(src='assets/js/accordions.js')
 script(language='text/Javascript').
