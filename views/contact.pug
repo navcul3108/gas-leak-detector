@@ -1,138 +1,64 @@
-doctype html
-head
-  meta(charset='utf-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
-  meta(name='description' content='')
-  meta(name='author' content='')
-  link(rel="icon" href="https://seeklogo.com/images/D/dota-2-logo-A8CAC9B4C9-seeklogo.com.png" type="image/x-icon")
-  link(href='https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap' rel='stylesheet')
-  title HCMUT
-  // Bootstrap core CSS
-  link(href='vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
-  //
-    TemplateMo 546 Sixteen Clothing
-    https://templatemo.com/tm-546-sixteen-clothing
-  // Additional CSS Files
-  link(rel='stylesheet' href='assets/css/fontawesome.css')
-  link(rel='stylesheet' href='assets/css/templatemo-sixteen.css')
-  link(rel='stylesheet' href='assets/css/owl.css')
-// ***** Preloader Start *****
-#preloader
-  .jumper
-    div
-    div
-    div
-// ***** Preloader End *****
-// Header
-header
-  nav.navbar.navbar-expand-lg
+extend layout
+
+block variables 
+  -var title="Thông tin"
+
+block content
+  // ***** Preloader Start *****
+  #preloader
+    .jumper
+      div
+      div
+      div
+  // ***** Preloader End *****
+
+  // Page Content
+  .page-heading.about-heading.header-text
     .container
-      img(src='https://seeklogo.com/images/D/dota-2-logo-A8CAC9B4C9-seeklogo.com.png' style="width:50px;height:50px;margin-left:-30px;margin-right:60px" alt='logo')
-      a.navbar-brand(href='index')
-        h2
-          |Hệ thống phát hiện 
-          em rò rỉ khí Gas
-      button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
-        span.navbar-toggler-icon
-      #navbarResponsive.collapse.navbar-collapse
-        ul.navbar-nav.ml-auto
-          if user
-            li.nav-item.active
-            a.nav-link(href='feed')
-              | Thiết bị
-            li.nav-item
-              a.nav-link(href='#')
-                span=user.name
-            li.nav-item
-              a.nav-link(href='logout')  &Dstrok;&abreve;ng xu&#x1EA5;t
-          else
-            li.nav-item
-              a.nav-link(href='index')
-                | Trang ch&#x1EE7;
-                span.sr-only (current)
-            li.nav-item
-              a.nav-link(href='signup') &Dstrok;&abreve;ng K&yacute;
-            li.nav-item
-              a.nav-link(href='login') &Dstrok;&abreve;ng Nh&#x1EAD;p
-            li.nav-item.active
-              a.nav-link(href='contact') V&#x1EC1; ch&uacute;ng t&ocirc;i
-// Page Content
-.page-heading.about-heading.header-text
-  .container
-    .row
-      .col-md-12
-        .text-content
-          h4 về chúng tôi
-          h2 Nhóm 9 - L03 - HCMUT
-.best-features.about-features
-  .container
-    .row
-      .col-md-12
-        .section-heading
-          h2 Chúng tôi là
-      .col-md-6
-        .right-image
-          img(src='assets/images/feature-image.jpg' alt='')
-      .col-md-6
-        .left-content
-          h4 Chúng tôi là ai?
-          p Chúng tôi là sinh viên năm 3 ngành khoa học máy tính trường đại học Bách Khoa
-.team-members
-  .container
-    .row
-      .col-md-12
-        .section-heading
-          h2 Our Team Members
-      .col-md-4
-        .team-member
-          .thumb-container
-            //- img(src='assets/images/team_01.jpg' alt='')
-            .hover-effect
-              .hover-content
-                ul.social-icons
-                  li
-                    a(href='https://www.facebook.com/HGKhang/')
-                      i.fa.fa-facebook
-                  li
-                    a(href='#')
-                      i.fa.fa-twitter
-                  li
-                    a(href='#')
-                      i.fa.fa-linkedin
-                  li
-                    a(href='#')
-                      i.fa.fa-behance
-          .down-content
-            h4 Hoàng Gia Khang
-            span Thành viên
-            p Sinh viên năm 3 - HCMUT
-              
-      
-footer
-  .container
-    .row
-      .col-md-12
-        .inner-content
-          p
-            | Copyright &copy; 2020 HCMUT
-// Bootstrap core JavaScript
-script(src='vendor/jquery/jquery.min.js')
-script(src='vendor/bootstrap/js/bootstrap.bundle.min.js')
-// Additional Scripts
-script(src='assets/js/custom.js')
-script(src='assets/js/logout.js')
-script(src='assets/js/owl.js')
-script(src='assets/js/slick.js')
-script(src='assets/js/isotope.js')
-script(src='assets/js/accordions.js')
-script(language='text/Javascript').
-  cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
-  function clearField(t) {
-  //declaring the array outside of the
-  if (!cleared[t.id]) {
-  // function makes it static and global
-  cleared[t.id] = 1; // you could use true and false, but that's more typing
-  t.value = ""; // with more chance of typos
-  t.style.color = "#fff";
-  }
-  }
+      .row
+        .col-md-12
+          .text-content
+            h4 về chúng tôi
+            h2 Nhóm 9 - L03 - HCMUT
+  .best-features.about-features
+    .container
+      .row
+        .col-md-12
+          .section-heading
+            h2 Chúng tôi là
+        .col-md-6
+          .right-image
+            img(src='assets/images/feature-image.jpg' alt='')
+        .col-md-6
+          .left-content
+            h4 Chúng tôi là ai?
+            p Chúng tôi là sinh viên năm 3 ngành khoa học máy tính trường đại học Bách Khoa
+  .team-members
+    .container
+      .row
+        .col-md-12
+          .section-heading
+            h2 Our Team Members
+        .col-md-4
+          .team-member
+            .thumb-container
+              //- img(src='assets/images/team_01.jpg' alt='')
+              .hover-effect
+                .hover-content
+                  ul.social-icons
+                    li
+                      a(href='https://www.facebook.com/HGKhang/')
+                        i.fa.fa-facebook
+                    li
+                      a(href='#')
+                        i.fa.fa-twitter
+                    li
+                      a(href='#')
+                        i.fa.fa-linkedin
+                    li
+                      a(href='#')
+                        i.fa.fa-behance
+            .down-content
+              h4 Hoàng Gia Khang
+              span Thành viên
+              p Sinh viên năm 3 - HCMUT

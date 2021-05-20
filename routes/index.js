@@ -2,6 +2,10 @@ var express = require("express");
 var router = express.Router();
 const authController = require("../controllers/authController");
 
+router.get("/feed", (req, res)=>{
+  res.render("feed")
+})
+
 router.use(authController.isLoggedIn);
 /* GET home page. */
 router.get("/index", function (req, res, next) {
@@ -31,8 +35,8 @@ router.get("/", function (req, res, next) {
   res.render("index");
 });
 
-router.get("/feed", authController.protect, function (req, res, next) {
-  res.render("feed");
-});
+// router.get("/feed", authController.protect, function (req, res, next) {
+//   res.render("feed");
+// });
 
 module.exports = router;
