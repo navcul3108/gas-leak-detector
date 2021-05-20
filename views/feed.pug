@@ -47,18 +47,18 @@ block content
         .d-flex.justify-content-around
           h5.text-info.range-value 0
           input.w-75#led-signal.form-control-range(type="range", min="0", max="2", step="1", value="0")
-          button#post-led-data(disabled).btn.btn-success Post
+          button#post-led-data(disabled).btn.btn-success Publish
       .input-area.form-group
         label.w-100(for="speaker-level") Adjust level of speaker(0->1023) 
         .d-flex.justify-content-around
           h5.text-info.range-value 0
           input.w-75#speaker-level.form-control-range(type="range", min="0", max="1023", step="1", value="0")
-          button#post-speaker-data(disabled).btn.btn-success Post
+          button#post-speaker-data(disabled).btn.btn-success Publish
       .input-area.form-group 
-        label.w-100 Post a message to show on LCD
+        label.w-100 Publish a message to show on LCD
         .d-flex.justify-content-around
           input#lcd-message.w-75.form-control(type="text")
-          button#post-lcd-data(disabled).btn.btn-success Post
+          button#post-lcd-data(disabled).btn.btn-success Publish
       .input-area.form-group
         label.w-100(for="temp-value") Temperature value(*C)
         .d-flex.justify-content-around
@@ -69,27 +69,27 @@ block content
           h5.text-info.range-value 0
           input#humid-value.w-75.form-control-range(type="range", min="0", max="100", step="1", value="0")       
         .d-flex.justify-content-center 
-          button#post-temp-humid-data(disabled).btn.btn-success Post
+          button#post-temp-humid-data(disabled).btn.btn-success Publish
       .input-area.form-group 
         label Gas signal 
         .d-flex.justify-content-around
           .custom-control.custom-switch
             input#signal-switch.custom-control-input(type="checkbox", data-toggle="toggle")
             label.custom-control-label(for="signal-switch") Toggle
-          button#post-gas-data(disabled).btn.btn-success Post
+          button#post-gas-data(disabled).btn.btn-success Publish
       .input-area.form-group 
         label DRV speed
         .d-flex.justify-content-around
           h5.text-info.range-value 0
           input#drv-value.w-75.form-control-range(type="range", min="-255", max="255", step="1", value="0")       
-          button#post-drv-data(disabled).btn.btn-success Post
+          button#post-drv-data(disabled).btn.btn-success Publish
       .input-area.form-group 
         label Relay signal 
         .d-flex.justify-content-around
           .custom-control.custom-switch
             input#signal-switch2.custom-control-input(type="checkbox", data-toggle="toggle")
             label.custom-control-label(for="signal-switch2") Toggle
-          button#post-relay-data(disabled).btn.btn-success Post
+          button#post-relay-data(disabled).btn.btn-success Publish
       
     .get-data-area
       .data-area
