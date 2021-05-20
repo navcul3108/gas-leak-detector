@@ -6,7 +6,7 @@
 ### Debug with nodemon, restart server whenever there is a change on JS files
 `npm run test`
 
-Access server at `localhost:3000`, go to **Thiết bị** in order to test with Adafruti IO.
+Access server at `localhost:3000`, go to **Thiết bị** in order to test with Adafruit IO.
 
 ### Adafruit feed links
 |Device|Feeds link|
