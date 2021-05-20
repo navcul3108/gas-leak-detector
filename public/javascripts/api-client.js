@@ -7,30 +7,16 @@ const parseCSVToJSON = (csvLine)=>{
     if(jsonDataStr.endsWith(","))
         jsonDataStr = jsonDataStr.substr(0, jsonDataStr.length-2);
 
-    console.log('jsonDataStr :>> ', jsonDataStr);
     const dataObj = JSON.parse(jsonDataStr);
-    console.log('dataObj :>> ', dataObj);
     return dataObj
 }
 
-const getLedData = async(axiosInstance, feedsURL, AIOkey)=>{
-    try{
-        const response = await axiosInstance.get(process.env.LED_DATA_FEED_URL) 
-        return response.data;
-    }
-    catch(err){
-        console.error(err);
-        return {};
-    }
-}
-
-const postLedData = async(axiosInstance, feedsURL, AIOkey, signal) =>{
+const postLedData = async(axiosInstance, feedURL, signal) =>{
     try{
         if(typeof signal=="number" && 0<=signal<=2){
             const formData = {id:"1", name:"LED", data: signal.toString(), unit:""};
               
-            const response = await axiosInstance.post(process.env.LED_DATA_FEED_URL, {value: JSON.stringify(formData)});
-            console.log(response.data);  
+            const response = await axiosInstance.post(feedURL, {value: JSON.stringify(formData)});
             return response.status === 200;   
         }
         return false
@@ -41,12 +27,11 @@ const postLedData = async(axiosInstance, feedsURL, AIOkey, signal) =>{
     }
 }
 
-const postSpeakerData = async(axiosInstance, feedsURL, AIOkey, level)=>{
+const postSpeakerData = async(axiosInstance, feedURL, level)=>{
     try{
         if(typeof level=="number" && 0<=level && level<=1023){
             let formData = {id:"3", name:"SPEAKER", data:level.toString(), unit: ""};
-            const response = await axiosInstance.post(process.env.SPEAKER_DATA_FEED_URL, {value: JSON.stringify(formData)});
-            console.log(response.data);
+            const response = await axiosInstance.post(feedURL, {value: JSON.stringify(formData)});
             return response.status === 200;   
         }
         return false;
@@ -57,12 +42,11 @@ const postSpeakerData = async(axiosInstance, feedsURL, AIOkey, level)=>{
     }
 }
 
-const postLCDData = async(axiosInstance, feedsURL, AIOkey, message)=>{
+const postLCDData = async(axiosInstance, feedURL, message)=>{
     try{
         if(typeof message=="string"){
             let formData = {id:"5", name:"LCD", data:message, unit: ""};
-            const response = await axiosInstance.post(process.env.LCD_DATA_FEED_URL, {value: JSON.stringify(formData)});
-            console.log(response.data);
+            const response = await axiosInstance.post(feedURL, {value: JSON.stringify(formData)});
             return response.status === 200;   
         }
         return false
@@ -73,23 +57,11 @@ const postLCDData = async(axiosInstance, feedsURL, AIOkey, message)=>{
     }
 }
 
-const getTempAndHumidData = async(axiosInstance, feedsURL, AIOkey)=>{
-    try{
-        const response = await axiosInstance.get(process.env.TEMP_HUMID_DATA_FEED_URL);
-        return response.data;
-    }   
-    catch(err){
-        console.error(err);
-        return {}
-    }
-}
-
-const postTempAndHumidData = async(axiosInstance, feedsURL, AIOkey, temp, humid)=>{
+const postTempAndHumidData = async(axiosInstance, feedURL, temp, humid)=>{
     try{
         if(typeof temp=="number" && 0<=temp<=50 && typeof humid=="number" && 0<=humid<=100){
             const formData = {id:"7", name: "TEMP-HUMID", data: `${temp}-${humid}`, unit: "*C-%"}
-            const response = await axiosInstance.post(process.env.TEMP_HUMID_DATA_FEED_URL, {value: JSON.stringify(formData)});
-            console.log(response.data);
+            const response = await axiosInstance.post(feedURL, {value: JSON.stringify(formData)});
             return response.status === 200;    
         }
         return false
@@ -100,12 +72,11 @@ const postTempAndHumidData = async(axiosInstance, feedsURL, AIOkey, temp, humid)
     }
 }
 
-const postGasData = async(axiosInstance, feedsURL, AIOkey, isOverThreshold)=>{
+const postGasData = async(axiosInstance, feedURL, isOverThreshold)=>{
     if(typeof isOverThreshold=="boolean"){
         try{
             const formData = {id:"23", name:"GAS", data: isOverThreshold?"1":"0", unit: ""};
-            const response = await axiosInstance.post(process.env.GAS_DATA_FEED_URL, {value: JSON.stringify(formData)})
-            console.log(response.data)
+            const response = await axiosInstance.post(feedURL, {value: JSON.stringify(formData)})
             return response.status === 200;
         }
         catch(err){
@@ -114,9 +85,9 @@ const postGasData = async(axiosInstance, feedsURL, AIOkey, isOverThreshold)=>{
     }
 }
 
-const getLastestGasData = async(axiosInstance)=>{
+const getLastestData = async(axiosInstance, feedURL)=>{
     try{
-        const response = await axiosInstance.get(process.env.GAS_DATA_FEED_URL+"/retain");
+        const response = await axiosInstance.get(feedURL+"/retain");
         const csvLine = response.data.toString();
         const data = parseCSVToJSON(csvLine);
         return data;
@@ -126,3 +97,37 @@ const getLastestGasData = async(axiosInstance)=>{
     }
 }
 
+const postDRVData = async(axiosInstance, feedURL, speed)=>{
+    if(typeof speed=="number" && -255<=speed<=255){
+        try{
+            const formData = {id:"10", name:"DRV_PWM", data: speed.toString(), unit: ""};
+            const response = await axiosInstance.post(feedURL, {value: JSON.stringify(formData)})
+            return response.status == 200;
+        }
+        catch(err)
+        {
+            console.error(err);
+            return false
+        }
+    }
+    return false;
+}
+
+const postRelayData = async(axiosInstance, feedURL, turnOn)=>{
+    if(typeof turnOn=="boolean"){
+        try{
+            const formData = {id:"11", name:"RELAY", data: turnOn? "1":"0", unit: ""};
+            const response = await axiosInstance.post(feedURL, {value: JSON.stringify(formData)})
+            return response.status == 200;
+        }
+        catch(err)
+        {
+            console.error(err);
+            return false
+        }
+        
+    }
+    return false;
+}
+
+export {postLedData, postGasData, postLCDData, postSpeakerData, postTempAndHumidData, postDRVData, getLastestData, postRelayData}

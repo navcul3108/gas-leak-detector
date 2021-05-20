@@ -34,3 +34,25 @@ body{
     border-bottom: 1px solid #51c4d3;
     margin: 0.75em;
 }
+
+.data-area{
+    padding: 1em;
+    border-bottom: 1px solid #51c4d3;
+    margin: 0.75em;
+}
+
+.data-area .col-md-3:first-child>h5{
+    color: #231cf1; 
+}
+
+.data-area .col-md-3:nth-child(2)>h5{
+    color: #08bad1; 
+}
+
+.data-area .col-md-3:nth-child(3)>h5{
+    color: #07c03e; 
+}
+
+.data-area .col-md-3:nth-child(4)>h5{
+    color: #ec5c94; 
+}
