@@ -18,3 +18,8 @@ Access server at `localhost:3000`, go to **Thiết bị** in order to test with 
 |GAS SENSOR|https://io.adafruit.com/navcul3108/feeds/kkllm-iot-gas|
 |DRV |https://io.adafruit.com/navcul3108/feeds/kkllm-iot-drv|
 |RELAY |https://io.adafruit.com/navcul3108/feeds/kkllm-iot-relay|
+
+### Contributors
+[<img alt="navcul3108" src="https://avatars.githubusercontent.com/u/51563364?v=4&s=117" style="width=30%">](https://github.com/navcul3108) |[<img alt="khangsk" src="https://avatars.githubusercontent.com/u/45751688?v=4&s=117" style="width=30%">](https://github.com/khangsk)
+:---:|:---:|
+[navcul3108](https://github.com/navcul3108)|[khangsk](https://github.com/khangsk)|
