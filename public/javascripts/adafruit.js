@@ -39,54 +39,59 @@ $("#confirm-info").click(function(){
         mqttClient.subscribe(relayFeed, errCb);
 
         mqttClient.on("message", function (topic, payload) {
-            console.log('topic :>> ', topic);
-            const data = JSON.parse(payload.toString());
-            console.log('data :>> ', data);
-            switch(topic){
-                case ledFeed:
-                    $("#led-area .id-value").text(data.id)
-                    $("#led-area .name-value").text(data.name)
-                    $("#led-area .data-value").text(data.data)
-                    $("#led-area .unit-value").text(data.unit)
-                    break;
-                case speakerFeed:
-                    $("#speaker-area .id-value").text(data.id)
-                    $("#speaker-area .name-value").text(data.name)
-                    $("#speaker-area .data-value").text(data.data)
-                    $("#speaker-area .unit-value").text(data.unit)
-                    break;
-                case lcdFeed:
-                    $("#lcd-area .id-value").text(data.id)
-                    $("#lcd-area .name-value").text(data.name)
-                    $("#lcd-area .data-value").text(data.data)
-                    $("#lcd-area .unit-value").text(data.unit)
-                    break;
-                case tempHumidFeed:
-                    $("#temp-humid-area .id-value").text(data.id)
-                    $("#temp-humid-area .name-value").text(data.name)
-                    $("#temp-humid-area .data-value").text(data.data)
-                    $("#temp-humid-area .unit-value").text(data.unit)
-                    break;
-                case gasFeed:
-                    $("#gas-area .id-value").text(data.id)
-                    $("#gas-area .name-value").text(data.name)
-                    $("#gas-area .data-value").text(data.data)
-                    $("#gas-area .unit-value").text(data.unit)
-                    break;
-                case drvFeed:
-                    $("#drv-area .id-value").text(data.id)
-                    $("#drv-area .name-value").text(data.name)
-                    $("#drv-area .data-value").text(data.data)
-                    $("#drv-area .unit-value").text(data.unit)
-                    break;
-                case relayFeed:
-                    $("#relay-area .id-value").text(data.id)
-                    $("#relay-area .name-value").text(data.name)
-                    $("#relay-area .data-value").text(data.data)
-                    $("#relay-area .unit-value").text(data.unit)
-                    break;
-                default:
-                    break;
+            try{
+                console.log('topic :>> ', topic);
+                const data = JSON.parse(payload.toString());
+                console.log('data :>> ', data);
+                switch(topic){
+                    case ledFeed:
+                        $("#led-area .id-value").text(data.id)
+                        $("#led-area .name-value").text(data.name)
+                        $("#led-area .data-value").text(data.data)
+                        $("#led-area .unit-value").text(data.unit)
+                        break;
+                    case speakerFeed:
+                        $("#speaker-area .id-value").text(data.id)
+                        $("#speaker-area .name-value").text(data.name)
+                        $("#speaker-area .data-value").text(data.data)
+                        $("#speaker-area .unit-value").text(data.unit)
+                        break;
+                    case lcdFeed:
+                        $("#lcd-area .id-value").text(data.id)
+                        $("#lcd-area .name-value").text(data.name)
+                        $("#lcd-area .data-value").text(data.data)
+                        $("#lcd-area .unit-value").text(data.unit)
+                        break;
+                    case tempHumidFeed:
+                        $("#temp-humid-area .id-value").text(data.id)
+                        $("#temp-humid-area .name-value").text(data.name)
+                        $("#temp-humid-area .data-value").text(data.data)
+                        $("#temp-humid-area .unit-value").text(data.unit)
+                        break;
+                    case gasFeed:
+                        $("#gas-area .id-value").text(data.id)
+                        $("#gas-area .name-value").text(data.name)
+                        $("#gas-area .data-value").text(data.data)
+                        $("#gas-area .unit-value").text(data.unit)
+                        break;
+                    case drvFeed:
+                        $("#drv-area .id-value").text(data.id)
+                        $("#drv-area .name-value").text(data.name)
+                        $("#drv-area .data-value").text(data.data)
+                        $("#drv-area .unit-value").text(data.unit)
+                        break;
+                    case relayFeed:
+                        $("#relay-area .id-value").text(data.id)
+                        $("#relay-area .name-value").text(data.name)
+                        $("#relay-area .data-value").text(data.data)
+                        $("#relay-area .unit-value").text(data.unit)
+                        break;
+                    default:
+                        break;
+                }    
+            }
+            catch(err){
+                console.error(err);
             }
         })
         $(".btn-success").removeAttr("disabled")
