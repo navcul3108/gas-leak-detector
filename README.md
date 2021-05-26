@@ -19,7 +19,7 @@ Access server at `localhost:3000`, go to **Thiết bị** in order to test with 
 |DRV |https://io.adafruit.com/navcul3108/feeds/kkllm-iot-drv|
 |RELAY |https://io.adafruit.com/navcul3108/feeds/kkllm-iot-relay|
 ### CSE adafruit keys
-|Username|Devices|Keys|
+|Username|Devices|Key|
 |--------|-------|----|
 |CSE_BBC|LED, SPEAKER, LCD, TEMP HUMID SENSOR, DRV|aio_ujHa39CATridh60sV0wkkAhJmNhG|
 |CSE_BBC1|RELAY, GAS SENSOR|aio_yqUQ00Ryi2liePf8ElzL3yq3dNij|
