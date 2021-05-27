@@ -2,19 +2,39 @@
   "name": "webapp",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "start": "node ./bin/www",
-    "test": "node ./adafruit/api.js"
+    "test": "nodemon ./bin/www",
+    "watch:js": "parcel watch ./public/assets/js/index.js --out-dir ./public/assets/js --out-file bundle.js",
+    "build:js": "parcel watch ./public/assets/js/index.js --out-dir ./public/assets/js --out-file bundle.js"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "/public/javascripts/*"
+    ]
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "~1.4.5",
+    "debug": "~4.3.1",
     "dotenv": "^9.0.2",
-    "express": "~4.16.1",
-    "firebase-admin": "^9.7.0",
-    "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11"
+    "email-validator": "^2.0.4",
+    "express": "~4.17.1",
+    "firebase-admin": "^9.8.0",
+    "http-errors": "~1.8.0",
+    "morgan": "~1.10.0",
+    "mqtt": "^4.2.6",
+    "nodemon": "^2.0.7",
+    "pug": "3.0.2",
+    "util-promisify": "^2.1.0",
+    "util-promisifyall": "^1.0.6"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "webpack-cli": "^4.7.0"
   }
 }

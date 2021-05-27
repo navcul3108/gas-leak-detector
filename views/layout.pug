@@ -1,7 +1,82 @@
+block variables
 doctype html
 html
   head
-    title= title
+    title= title? title: "Gas leak detector"
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description' content='')
+    meta(name='author' content='')
+    link(rel='stylesheet', href='/stylesheets/bootstrap/bootstrap.min.css')
+
+    link(rel="icon" href="https://seeklogo.com/images/D/dota-2-logo-A8CAC9B4C9-seeklogo.com.png" type="image/x-icon")
+    link(href='https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap' rel='stylesheet')
+    link(rel='stylesheet' href='/assets/css/templatemo-sixteen.css')
+    link(rel='stylesheet' href='/assets/css/owl.css')
+
+    script(src="https://code.jquery.com/jquery-3.5.1.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous")
+    script(src="/javascripts/bootstrap/bootstrap.bundle.min.js" ) 
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" integrity="sha512-RXf+QSDCUQs5uwRKaDoXt55jygZZm2V++WUZduaU/Ui/9EGp3f/2KZVahFZBKGH0s774sd3HmrhUy+SgOFQLVQ==" crossorigin="anonymous")
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    header
+      nav.navbar.navbar-expand-lg
+        .container
+          img(src='https://seeklogo.com/images/D/dota-2-logo-A8CAC9B4C9-seeklogo.com.png' style="width:50px;height:50px;margin-left:-30px;margin-right:60px" alt='logo')
+          a.navbar-brand(href='index')
+            h2
+              |Hệ thống phát hiện 
+              em rò rỉ khí Gas
+          button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbarResponsive.collapse.navbar-collapse
+            ul.navbar-nav.ml-auto
+              if user
+                li.nav-item.active
+                a.nav-link(href='feed')
+                  | Thiết bị
+                li.nav-item
+                  a.nav-link(href='#')
+                    span=user.name
+                li.nav-item
+                  a.nav-link(href='logout')  &Dstrok;&abreve;ng xu&#x1EA5;t
+              else
+                li.nav-item.active
+                a.nav-link(href='index')
+                  | Trang ch&#x1EE7;
+                  span.sr-only (current)
+                li.nav-item
+                  a.nav-link(href='signup') &Dstrok;&abreve;ng k&yacute;
+                li.nav-item
+                  a.nav-link(href='login') &Dstrok;&abreve;ng nh&#x1EAD;p
+                li.nav-item
+                  a.nav-link(href='contact') V&#x1EC1; ch&uacute;ng t&ocirc;i  
+    
     block content
+
+    footer
+      .container
+        .row
+          .col-md-12
+            .inner-content
+              p
+                | Copyright &copy; 2021 HCMUT
+    // Additional Scripts
+  script(src='assets/js/custom.js')
+  script(src='assets/js/owl.js')
+  script(src='assets/js/slick.js')
+  script(src='assets/js/logout.js')
+  script(src='assets/js/isotope.js')
+  script(src='assets/js/accordions.js')
+  script(language='text/Javascript').
+    cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+    function clearField(t) {
+      //declaring the array outside of the
+      if (!cleared[t.id]) {
+        // function makes it static and global
+        cleared[t.id] = 1; // you could use true and false, but that's more typing
+        t.value = ""; // with more chance of typos
+        t.style.color = "#fff";
+      }
+    }

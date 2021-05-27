@@ -1,5 +1,53 @@
 extends layout
 
+block variables 
+  -var title="Trang chủ"
+
 block content
-  h1= title
-  p Welcome to #{title}
+  // ***** Preloader Start *****
+  #preloader
+    .jumper
+      div
+      div
+      div
+  // ***** Preloader End *****
+
+  // Page Content
+  // Banner Starts Here
+  .banner.header-text
+    .owl-banner.owl-carousel
+      .banner-item-01
+        .text-content
+          h2 Cảnh báo chính xác
+      .banner-item-02
+        .text-content
+          h2 Cảnh báo kịp thời
+      .banner-item-03
+        .text-content
+          h2 Hiển thị dữ liệu thường xuyên
+  // Banner Ends Here
+  .best-features
+    .container
+      .row
+        .col-md-12
+          .section-heading
+            h2 Về hệ thống cảnh báo khi gas
+        .col-md-6
+          .left-content
+            
+            p Hệ thống hiển thị nồng độ khí gas và nhiệt độ nhằm đưa ra cảnh báo kịp thời khi nồng độ vượt quá chỉ số an toàn cho phép, có nguy cơ gây nguy hiểm cao. Ngoài ra, hệ thống cũng hỗ trợ mở thông gió, đóng van gas và phun nước trong trường hợp cần thiết
+
+            ul.featured-list
+              li
+                span Ngày nay, trong các hộ gia đình, doanh nghiệp nhà hàng, phương tiện giao thông, khí gas được sử dụng phổ biến trong việc cung cấp nhiệt, cung cấp nhiên liệu cho các phương tiên giao thông.
+              li
+                span Tuy nhiên, việc sử dụng khí gas càng phổ biến sẽ kéo theo đó nguy cơ, cùng các vụ cháy nổ do khí gas cũng tăng cao bởi vì gas rất dễ bắt lửa. Đặc biệt, khi khí gas bị rò rỉ trong các hộ gia đình, ở nồng độ cao có thể dễ gây ngộ độc cho người hít phải.
+              li
+                span Có thể thấy, các vụ cháy nổ do rò rỉ khí gas thường gây thiệt hại nặng nề về tài sản và con người, mà nguyên nhân phổ biến thường là do van bị hở, đường dẫn bị thủng hoặc đứt.
+              li
+                span Hơn nữa, rò rỉ khí gas thường xảy ra ở các khu vực kho, hầm, nơi ít người qua lại và khi phát hiện ra thường thì đã quá muộn.
+        .col-md-6
+          .right-image
+            img(src='assets/images/feature-image.jpg' alt='')
+
+

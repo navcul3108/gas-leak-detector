@@ -1,0 +1,202 @@
+extends layout 
+
+block variables 
+  -var title="Communicate with Adafruit IO"
+
+block content 
+  link(rel="stylesheet", href="/stylesheets/adafruit.css") 
+  .url-area 
+    h4.text-primary.text-center Adafruit IO informations
+    .form-group 
+      label Adafruit user name
+      input#adafruit-user-name.form-control(type="text")
+    .form-group 
+      label Adafruit IO key
+      input#aio-key.form-control(type="text")
+    .row.mb-2
+      .col
+        label(for="led-feed-name") LED feed name 
+        input.form-control#led-feed-name(type="text", value="kkllm-iot-led")
+      .col
+        label LCD feed name 
+        input.form-control#lcd-feed-name(type="text", value="kkllm-iot-lcd")
+      .col 
+        label Speaker feed name
+        input.form-control#speaker-feed-name(type="text", value="kkllm-iot-speaker")
+    .row.mb-2
+      .col
+        label Temperature and humid sensor feed name 
+        input.form-control#temp-humid-feed-name(type="text", value="kkllm-iot-temp-humid")
+      .col
+        label Gas sensor feed name
+        input.form-control#gas-feed-name(type="text", value="kkllm-iot-gas")
+    .row.mb-2 
+      .col
+        label DRV Motor feed name 
+        input.form-control#drv-feed-name(type="text", value="kkllm-iot-drv")
+      .col
+        label Relay feed name
+        input.form-control#relay-feed-name(type="text", value="kkllm-iot-relay")
+    .d-flex.justify-content-center
+      button#confirm-info.btn.btn-success Apply
+
+  .adafruit-io
+    .posting-data 
+      .input-area.form-group 
+        label.w-100(for="led-signal") LED input(0, 1, 2)
+        .d-flex.justify-content-around
+          h5.text-info.range-value 0
+          input.w-75#led-signal.form-control-range(type="range", min="0", max="2", step="1", value="0")
+          button#post-led-data(disabled).btn.btn-success Publish
+      .input-area.form-group
+        label.w-100(for="speaker-level") Adjust level of speaker(0->1023) 
+        .d-flex.justify-content-around
+          h5.text-info.range-value 0
+          input.w-75#speaker-level.form-control-range(type="range", min="0", max="1023", step="1", value="0")
+          button#post-speaker-data(disabled).btn.btn-success Publish
+      .input-area.form-group 
+        label.w-100 Publish a message to show on LCD
+        .d-flex.justify-content-around
+          input#lcd-message.w-75.form-control(type="text")
+          button#post-lcd-data(disabled).btn.btn-success Publish
+      .input-area.form-group
+        label.w-100(for="temp-value") Temperature value(*C)
+        .d-flex.justify-content-around
+          h5.text-info.range-value 0
+          input#temp-value.w-75.form-control-range(type="range", min="0", max="50", step="1", value="0")       
+        label.w-100(for="temp-value") Humid value(%)
+        .d-flex.justify-content-around
+          h5.text-info.range-value 0
+          input#humid-value.w-75.form-control-range(type="range", min="0", max="100", step="1", value="0")       
+        .d-flex.justify-content-center 
+          button#post-temp-humid-data(disabled).btn.btn-success Publish
+      .input-area.form-group 
+        label Gas signal 
+        .d-flex.justify-content-around
+          .custom-control.custom-switch
+            input#signal-switch.custom-control-input(type="checkbox", data-toggle="toggle")
+            label.custom-control-label(for="signal-switch") Toggle
+          button#post-gas-data(disabled).btn.btn-success Publish
+      .input-area.form-group 
+        label DRV speed
+        .d-flex.justify-content-around
+          h5.text-info.range-value 0
+          input#drv-value.w-75.form-control-range(type="range", min="-255", max="255", step="1", value="0")       
+          button#post-drv-data(disabled).btn.btn-success Publish
+      .input-area.form-group 
+        label Relay signal 
+        .d-flex.justify-content-around
+          .custom-control.custom-switch
+            input#signal-switch2.custom-control-input(type="checkbox", data-toggle="toggle")
+            label.custom-control-label(for="signal-switch2") Toggle
+          button#post-relay-data(disabled).btn.btn-success Publish
+      
+    .get-data-area
+      .data-area
+        h4.text-primary.text-center LED data
+        .row#led-area 
+          .col-md-3
+            h5 Id 
+            p.id-value
+          .col-md-3
+            h5 Name 
+            p.name-value
+          .col-md-3
+            h5 Data 
+            p.data-value
+          .col-md-3
+            h5 Unit 
+            p.unit-value
+      .data-area
+        h4.text-primary.text-center Speaker data
+        .row#speaker-area  
+          .col-md-3 
+            h5 Id 
+            p.id-value
+          .col-md-3
+            h5 Name 
+            p.name-value
+          .col-md-3
+            h5 Data 
+            p.data-value
+          .col-md-3
+            h5 Unit 
+            p.unit-value
+      .data-area 
+        h4.text-primary.text-center LCD data
+        .row#lcd-area 
+          .col-md-3
+            h5 Id 
+            p.id-value
+          .col-md-3
+            h5 Name 
+            p.name-value
+          .col-md-3
+            h5 Data 
+            p.data-value
+          .col-md-3
+            h5 Unit 
+            p.unit-value
+      .data-area
+        h4.text-primary.text-center Temperature and humid data
+        .row#temp-humid-area 
+          .col-md-3
+            h5 Id 
+            p.id-value
+          .col-md-3
+            h5 Name 
+            p.name-value
+          .col-md-3
+            h5 Data 
+            p.data-value
+          .col-md-3
+            h5 Unit 
+            p.unit-value
+      .data-area
+        h4.text-primary.text-center Gas data
+        .row#gas-area 
+          .col-md-3
+            h5 Id 
+            p.id-value
+          .col-md-3
+            h5 Name 
+            p.name-value
+          .col-md-3
+            h5 Data 
+            p.data-value
+          .col-md-3
+            h5 Unit 
+            p.unit-value
+      .data-area
+        h4.text-primary.text-center DRV data
+        .row#drv-area 
+          .col-md-3
+            h5 Id 
+            p.id-value
+          .col-md-3
+            h5 Name 
+            p.name-value
+          .col-md-3
+            h5 Data 
+            p.data-value
+          .col-md-3
+            h5 Unit 
+            p.unit-value
+      .data-area
+        h4.text-primary.text-center Relay data
+        .row#relay-area 
+          .col-md-3
+            h5 Id 
+            p.id-value
+          .col-md-3
+            h5 Name 
+            p.name-value
+          .col-md-3
+            h5 Data 
+            p.data-value
+          .col-md-3
+            h5 Unit 
+            p.unit-value
+  script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
+  script(src="/javascripts/browserMqtt.js") 
+  script(src="/javascripts/adafruit.js", type="module") 

@@ -1,0 +1,41 @@
+extends layout 
+
+block variables 
+  -var title="Đăng ký"
+
+block content
+  link(rel='stylesheet' href='assets/css/style.css')
+  #preloader
+    .jumper
+      div
+      div
+      div
+  // ***** Preloader End *****
+  .main.mgt
+    form#register-form.form(action='' method='POST')
+      h3.heading Th&agrave;nh vi&ecirc;n &dstrok;&abreve;ng k&yacute;
+      .spacer
+      .form-group
+        label.form-lable(for='fullname') T&ecirc;n &dstrok;&#x1EA7;y &dstrok;&#x1EE7;
+        input#fullname(name='fullname' rules='required' type='text' placeholder='VD: Hoàng Gia Khang')
+        span.form-message
+      .form-group
+        label.form-lable(for='avatar') &#x1EA2;nh &dstrok;&#x1EA1;i di&#x1EC7;n
+        input#avatar(name='avatar' type='file')
+        span.form-message
+      .form-group
+        label.form-lable(for='email') Email
+        input#email(name='email' rules='required|email' type='text' placeholder='VD: khangsk1998@gmail.com')
+        span.form-message
+      .form-group
+        label.form-lable(for='password') M&#x1EAD;t kh&#x1EA9;u
+        input#password(name='password' rules='required|min:6' type='password' placeholder='Nhập mật khẩu')
+        span.form-message
+      .form-group
+        label.form-lable(for='password_confirmation') Nh&#x1EAD;p l&#x1EA1;i m&#x1EAD;t kh&#x1EA9;u
+        input#password_confirmation(name='password_confirmation' rules='required|min:6' type='password' placeholder='Nhập lại mật khẩu')
+        span.form-message
+      button.form-submit &Dstrok;&abreve;ng k&yacute;
+  script(src="https://unpkg.com/axios/dist/axios.min.js")
+  script(src='assets/js/Validator.js')
+  script(src='assets/js/signup.js')

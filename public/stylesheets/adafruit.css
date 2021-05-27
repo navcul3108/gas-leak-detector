@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+
+
+body{
+    font-family: "Roboto";
+}
+
+.adafruit-io{
+    background-color: #d8e3e7;
+    padding: 2em;
+    display: flex;
+    justify-content: space-around;
+}
+
+.url-area{
+    width: 50%;
+    margin: auto;
+    border-radius: 1em;
+    padding: 2em;
+    background-color: cyan;
+    border-radius: 1em;
+}
+
+.posting-data,
+.get-data-area{
+    margin: 3em;
+    width: 45%;
+    border: 1px solid #132c33;
+    color: #132c33;
+    font-size: 16px;
+}
+
+.input-area{
+    padding: 1em;
+    border-bottom: 1px solid #51c4d3;
+    margin: 0.75em;
+}
+
+.data-area{
+    padding: 1em;
+    border-bottom: 1px solid #51c4d3;
+    margin: 0.75em;
+}
+
+.data-area .col-md-3:first-child>h5{
+    color: #231cf1; 
+}
+
+.data-area .col-md-3:nth-child(2)>h5{
+    color: #08bad1; 
+}
+
+.data-area .col-md-3:nth-child(3)>h5{
+    color: #07c03e; 
+}
+
+.data-area .col-md-3:nth-child(4)>h5{
+    color: #ec5c94; 
+}
