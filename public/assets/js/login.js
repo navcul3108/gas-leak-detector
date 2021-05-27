@@ -14,7 +14,7 @@ const login = async (email, password) => {
     if (res.data.status === "success") {
       alert("Đăng nhập thành công!");
       window.setTimeout(() => {
-        location.assign("/feed");
+        location.assign("/");
       }, 500);
     }
   } catch (err) {

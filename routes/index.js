@@ -19,7 +19,7 @@ router.get("/login", function (req, res, next) {
 });
 
 router.post("/login", authController.login);
-router.get("/logout", authController.logout, (req, res, next) => {
+router.post("/logout", authController.logout, (req, res, next) => {
   res.redirect("index");
 });
 
