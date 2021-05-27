@@ -1,16 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const userController = require("../controllers/userController");
 const authController = require("../controllers/authController");
 
-/* GET users listing. */
+// API for mobile app
 
 router.post("/signup", authController.signup);
-// router.post("/login", authController.login);
-
-router.get("/", function (req, res, next) {
-  res.render("error");
+router.post("/login", authController.login);
+router.get("/logout", authController.logout, function (req, res, next) {
+  res.json({
+    logout: "success"
+  })
 });
-// userController.getAllUsers);
+
 
 module.exports = router;

@@ -11,5 +11,3 @@ const logout = async () => {
     alert("error", "Error logging out! Try again");
   }
 };
-
-document.getElementById("logout").addEventListener("click", logout);
