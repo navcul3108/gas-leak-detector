@@ -34,24 +34,25 @@ html
             ul.navbar-nav.ml-auto
               if user
                 li.nav-item.active
-                a.nav-link(href='feed')
+                a.nav-link(href='/feed')
                   | Thiết bị
                 li.nav-item
                   a.nav-link(href='#')
                     span=user.name
                 li.nav-item
-                  a.nav-link(href='logout')  &Dstrok;&abreve;ng xu&#x1EA5;t
+                  form#logout-form.form-inline(method="post", action="/logout")
+                    a.nav-link(onclick='$("#logout-form").submit()')  Đăng xuất 
               else
                 li.nav-item.active
-                a.nav-link(href='index')
-                  | Trang ch&#x1EE7;
+                a.nav-link(href='/index')
+                  | Trang chủ;
                   span.sr-only (current)
                 li.nav-item
-                  a.nav-link(href='signup') &Dstrok;&abreve;ng k&yacute;
+                  a.nav-link(href='/signup') Đăng ký
                 li.nav-item
-                  a.nav-link(href='login') &Dstrok;&abreve;ng nh&#x1EAD;p
+                  a.nav-link(href='/login') Đăng nhập
                 li.nav-item
-                  a.nav-link(href='contact') V&#x1EC1; ch&uacute;ng t&ocirc;i  
+                  a.nav-link(href='/contact') Về chúng tôi 
     
     block content
 

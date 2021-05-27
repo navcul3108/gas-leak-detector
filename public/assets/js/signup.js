@@ -16,7 +16,7 @@ const login = async (name, email, password, passwordConfirm) => {
     if (res.data.status === "success") {
       alert("Đăng ký thành công!");
       window.setTimeout(() => {
-        location.assign("/feed");
+        location.assign("/");
       }, 500);
     }
   } catch (err) {
