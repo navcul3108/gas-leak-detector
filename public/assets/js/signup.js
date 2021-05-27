@@ -4,7 +4,7 @@ const login = async (name, email, password, passwordConfirm) => {
   try {
     const res = await axios({
       method: "POST",
-      url: "http://localhost:3000/signup",
+      url: "/signup",
       data: {
         name,
         email,
