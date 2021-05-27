@@ -1,16 +1,15 @@
 const { Router} = require("express")
 const authController = require("../controllers/authController")
-const {postSpeakerData, postDRVData, postRelayData, postLCDData} = require("../adafruit/api")
+const {postSpeakerData, postDRVData, postRelayData, postLCDData} = require("../utils/AdafruitIO")
+const router = Router();
 
-const alarmAPIRouter = Router();
+router.use(authController.protect)
 
-alarmAPIRouter.use(authController.protect)
-
-alarmAPIRouter.post("/turn-on", (req, res)=>{
-    const turnOnSpeaker = ()=>postSpeakerData(500)
-    const openValve = ()=>postRelayData(true)
-    const alarmMessage = ()=>postLCDData("Nguy hiểm!!!")
-    const openVentilation = ()=>postDRVData(255)
+router.post("/turn-on", (req, res)=>{
+    const turnOnSpeaker = postSpeakerData(500)
+    const openValve = postRelayData(true)
+    const alarmMessage = postLCDData("Danger!!")
+    const openVentilation = postDRVData(255)
 
     Promise.all([turnOnSpeaker, openValve, alarmMessage, openVentilation])
         .then((results)=>{
@@ -24,11 +23,11 @@ alarmAPIRouter.post("/turn-on", (req, res)=>{
         })
 })
 
-alarmAPIRouter.post("/turn-on", (req, res)=>{
-    const turnOffSpeaker = ()=>postSpeakerData(0)
-    const closeValve = ()=>postRelayData(false)
-    const alarmMessage = ()=>postLCDData("")
-    const closeVentilation = ()=>postDRVData(0)
+router.post("/turn-off", (req, res)=>{
+    const turnOffSpeaker = postSpeakerData(0)
+    const closeValve = postRelayData(false)
+    const alarmMessage = postLCDData("")
+    const closeVentilation = postDRVData(0)
 
     Promise.all([turnOffSpeaker, closeValve, alarmMessage, closeVentilation])
         .then((results)=>{
@@ -41,3 +40,6 @@ alarmAPIRouter.post("/turn-on", (req, res)=>{
             res.status(500).json("Có lỗi xảy ra!")
         })
 })
+
+
+module.exports = router

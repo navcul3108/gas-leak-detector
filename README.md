@@ -21,7 +21,7 @@ Access server at `localhost:3000`, go to **Thiết bị** in order to test with 
 ### CSE adafruit keys
 |Username|Devices|Key|
 |--------|-------|----|
-|CSE_BBC|LED, SPEAKER, LCD, TEMP HUMID SENSOR, DRV|aio_ujHa39CATridh60sV0wkkAhJmNhG|
+|CSE_BBC|LED, SPEAKER, LCD, TEMP HUMID SENSOR, DRV|aio_KXfp47zegx3CthMAEj6pB0ZeKoEm|
 |CSE_BBC1|RELAY, GAS SENSOR|aio_yqUQ00Ryi2liePf8ElzL3yq3dNij|
 ### Contributors
 [<img alt="navcul3108" src="https://avatars.githubusercontent.com/u/51563364?v=4&s=117" style="width=30%">](https://github.com/navcul3108) |[<img alt="khangsk" src="https://avatars.githubusercontent.com/u/45751688?v=4&s=117" style="width=30%">](https://github.com/khangsk)|
