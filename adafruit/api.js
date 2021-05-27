@@ -23,17 +23,6 @@ const parseCSVToJSON = (csvLine)=>{
     return dataObj
 }
 
-const getLedData = async()=>{
-    try{
-        const response = await axiosInstance.get(process.env.LED_DATA_FEED_URL) 
-        return response.data;
-    }
-    catch(err){
-        console.error(err);
-        return {};
-    }
-}
-
 const postLedData = async(signal) =>{
     try{
         if(typeof signal=="number" && 0<=signal<=2){
@@ -124,6 +113,38 @@ const postGasData = async(isOverThreshold)=>{
     }
 }
 
+const postDRVData = async(speed)=>{
+    if(typeof speed=="number" && -255<=speed<=255){
+        try{
+            const formData = {id:"10", name:"DRV_PWM", data: speed.toString(), unit: ""};
+            const response = await axiosInstance.post(feedURL, {value: JSON.stringify(formData)})
+            return response.status == 200;
+        }
+        catch(err)
+        {
+            console.error(err);
+            return false
+        }
+    }
+    return false;
+}
+
+const postRelayData = async(turnOn)=>{
+    if(typeof turnOn=="boolean"){
+        try{
+            const formData = {id:"11", name:"RELAY", data: turnOn? "1":"0", unit: ""};
+            const response = await axiosInstance.post(feedURL, {value: JSON.stringify(formData)})
+            return response.status == 200;
+        }
+        catch(err)
+        {
+            console.error(err);
+            return false
+        }
+    }
+    return false;
+}
+
 const getLastestGasData = async()=>{
     try{
         const response = await axiosInstance.get(process.env.GAS_DATA_FEED_URL+"/retain");
@@ -136,20 +157,6 @@ const getLastestGasData = async()=>{
     }
 }
 
-const successCb = ()=>console.log("Post data successfully!")
-//postLedData(1, 2).finally(()=>console.log("Post data successfully!"))
-//postSpeakerData(50).finally(successCb)
-//postLCDData("Hello World!").finally(successCb)
-// postTempAndHumidData(29, 30)
-//     .then((_)=>{
-//         getTempAndHumidData();
-//     })
-//     .finally(successCb)
-
-// Promise.all([postGasData(false), postGasData(false), postGasData(true), postGasData(false)])
-// .then(messages=>{
-//     getLastestGasData();
-// })
 
 module.exports = {getLedData, postLedData, postSpeakerData, postLCDData, getTempAndHumidData, postTempAndHumidData, 
-                 postGasData, getLastestGasData}
+                 postGasData, postDRVData, postRelayData, getLastestGasData}
