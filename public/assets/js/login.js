@@ -1,29 +1,45 @@
-// const authController = require("../../../controllers/authController");
+var isShowed = false;
+function showError(message) {
+    $("#text-error").show()
+    $("#text-error").text(message);
+    isShowed = true
+}
 
-const login = async (email, password) => {
-    try {
-        const res = await axios({
-            method: "POST",
-            url: "/login",
-            data: {
-                email,
-                password,
-            },
-        });
+function login() {
+    const email = $("#email").val();
+    const password = $("#password").val();
 
-        if (res.data.status === "success") {
-            alert("Đăng nhập thành công!");
-            window.setTimeout(() => {
-                location.assign("/");
-            }, 500);
-        }
-    } catch (err) {
-        alert(err.response.data.message);
+    if (!email || !password) {
+        showError("Bạn cần nhập đủ thông tin")
+        return
     }
+    if (password.length < 6) {
+        showError("Mật khẩu cần tối thiểu 6 ký tự!")
+        return
+    }
+
+    $.ajax({
+        method: "post",
+        url: "/login",
+        data: {
+            email,
+            password,
+        },
+        success: function (data) {
+            document.location.assign("/")
+        },
+        error: function (err) {
+            console.error(err);
+            showError(err.message)
+        }
+    });
 };
 
-var form = new Validator("#register-form");
-
-form.onSubmit = function (data) {
-    login(data.email, data.password);
-};
+$(document).ready(function () {
+    $("#login-form input").change(function () {
+        if (isShowed) {
+            $("#text-error").hide()
+            isShowed = false
+        }
+    })
+})

@@ -4,26 +4,28 @@ block variables
   -var title="Đăng nhập"
 
 block content
-  link(rel='stylesheet' href='assets/css/style.css')
+  link(rel="stylesheet" href="assets/css/style.css")
   #preloader
     .jumper
       div
       div
       div
   // ***** Preloader End *****
-  .main.mgt
-    form#register-form.form(action='' method='POST')
-      h3.heading &Dstrok;&abreve;ng nh&#x1EAD;p v&agrave;o h&#x1EC7; th&#x1ED1;ng
-      .spacer
+  .d-flex.justify-content-center.mt-3
+    form#login-form.w-50
+      h3.heading Đăng nhập vào hệ thống
+      .d-flex.justify-content-center
+        h4#text-error.text-danger
       .form-group
-        label.form-lable(for='email') Email
-        input#email(name='email' rules='required|email' type='text' placeholder='VD: khang@gmail.com')
+        label.form-lable(for="email") Email
+        input.form-control#email(name="email" type="text" placeholder="Email của bạn")
         span.form-message
       .form-group
-        label.form-lable(for='password') M&#x1EAD;t kh&#x1EA9;u
-        input#password(name='password' rules='required|min:6' type='password' placeholder='Nhập mật khẩu')
+        label.form-lable(for="password") M&#x1EAD;t kh&#x1EA9;u
+        input.form-control#password(name="password" type="password" placeholder="Nhập mật khẩu")
         span.form-message
-      button.form-submit &Dstrok;&abreve;ng nh&#x1EAD;p
+      .d-flex.justify-content-center
+        button.btn.btn-success(type="button", onclick="login()") Đăng nhập
   script(src="https://unpkg.com/axios/dist/axios.min.js")
-  script(src='assets/js/validator.js')
-  script(src='assets/js/login.js')
+  script(src="assets/js/validator.js")
+  script(src="assets/js/login.js")
