@@ -1,10 +1,9 @@
-extend layout 
+extends ../_layout 
 
 block variables 
   -var title="Đăng nhập"
 
 block content
-  link(rel="stylesheet" href="assets/css/style.css")
   #preloader
     .jumper
       div
@@ -27,5 +26,4 @@ block content
       .d-flex.justify-content-center
         button.btn.btn-success(type="button", onclick="login()") Đăng nhập
   script(src="https://unpkg.com/axios/dist/axios.min.js")
-  script(src="assets/js/validator.js")
-  script(src="assets/js/login.js")
+  script(src="/assets/js/login.js")

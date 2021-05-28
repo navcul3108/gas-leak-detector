@@ -1,0 +1,18 @@
+extends ../_layout
+
+block variables 
+  -var title = "Đã đăng nhập"
+
+block content 
+  style. 
+    .logged-in{
+      background-image: "/assets/images/logged-in.jpg";
+      background-position: cover;
+    };
+    .text-area{
+      background-color: #132c33;
+      color: #51c4d3;
+    }
+  .logged-in.d-flex.justify-content-center.align-items-center 
+    .text-area
+      h4.text-center.text-danger Bạn đã đăng nhập rồi!!!

@@ -1,13 +1,16 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const swaggerUi = require("swagger-ui-express")
+const swaggerDocument = require("./swagger-document.json")
 
-var indexRouter = require("./routes/index");
-var apiRouter = require("./routes/api")
+const indexRouter = require("./routes/index");
+const apiRouter = require("./routes/api")
+const usersRouter = require("./routes/users")
 
-var app = express();
+const app = express();
 
 const globalErrorHandler = require("./controllers/errorController");
 // view engine setup
@@ -20,16 +23,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use("/api-doc", swaggerUi.serve, swaggerUi.setup(swaggerDocument, {explorer:true}))
 app.use("/api", apiRouter);
 app.use("/", indexRouter);
+app.use("/users", usersRouter);
 
 app.use(function(req, res, next) {
-  next(createError(404));
+    next(createError(404));
 })
-app.use((req, res, next) => {
-  req.requestTime = new Date().toISOString();
-  next();
-});
 
 // error handling global
 app.use(globalErrorHandler);

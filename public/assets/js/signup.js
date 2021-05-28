@@ -24,7 +24,7 @@ function signup() {
 
     $.ajax({
         method: "post",
-        url: "/signup",
+        url: "/users/signup",
         dataType: "json",
         data: {
             name, email, password

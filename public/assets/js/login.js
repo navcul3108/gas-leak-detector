@@ -20,7 +20,7 @@ function login() {
 
     $.ajax({
         method: "post",
-        url: "/login",
+        url: "/users/login",
         data: {
             email,
             password,
