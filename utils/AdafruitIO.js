@@ -58,7 +58,7 @@ const postSpeakerData = async(level)=>{
         return false;
     }
     catch(err){
-        console.error(err)
+        console.error(err.data)
         return false;
     }
 }

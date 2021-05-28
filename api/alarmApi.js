@@ -1,9 +1,9 @@
 const { Router} = require("express")
-const authController = require("../controllers/authController")
+const {protect} = require("../controllers/authController")
 const {postSpeakerData, postDRVData, postRelayData, postLCDData} = require("../utils/AdafruitIO")
 const router = Router();
 
-router.use(authController.protect)
+router.use(protect)
 
 router.post("/turn-on", (req, res)=>{
     const turnOnSpeaker = postSpeakerData(500)
@@ -26,7 +26,7 @@ router.post("/turn-on", (req, res)=>{
 router.post("/turn-off", (req, res)=>{
     const turnOffSpeaker = postSpeakerData(0)
     const closeValve = postRelayData(false)
-    const alarmMessage = postLCDData("")
+    const alarmMessage = postLCDData("Turn off alarm")
     const closeVentilation = postDRVData(0)
 
     Promise.all([turnOffSpeaker, closeValve, alarmMessage, closeVentilation])
