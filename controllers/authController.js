@@ -1,18 +1,10 @@
-const jwt = require("jsonwebtoken");
-const User = require("./../models/userModel");
+const {User} = require("../models/Models");
 const bcrypt = require("bcrypt");
 const AppError = require("../utils/appError");
 const validator = require("email-validator");
-
+const {createDefaultCookieOption, createToken, descryptToken} = require("../utils/jwtUtils")
 const promisify = require("util-promisify");
 
-const aDay = 24 * 60 * 60 * 1000;
-
-const signToken = (user) => {
-    return jwt.sign(user, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_IN,
-    });
-};
 
 const isUserObject = (obj)=>{
     if(!obj.id || !obj.email || !obj.name)
@@ -25,16 +17,11 @@ const isUserObject = (obj)=>{
 }
 
 const createSendToken = (user, statusCode, res) => {
-    const token = signToken(user);
-    const cookieOption = {
-        expires: new Date(
-            Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * aDay
-        ),
-        httpOnly: true,
-    };
+    if(user.password)
+        delete user.password;
 
-    if (process.env.NODE_ENV === "production") cookieOption.secure = true;
-    user.password = undefined;
+    const token = createToken(user);
+    const cookieOption = createDefaultCookieOption()
 
     res.cookie("jwt", token, cookieOption);
     res.status(statusCode).json({
@@ -47,7 +34,7 @@ const createSendToken = (user, statusCode, res) => {
     });
 };
 
-exports.signup = async (req, res, next) => {
+exports.createNewUser = async (req, res, next) => {
     try {
         let newUser = req.body;
         if (!newUser.email) {
@@ -80,7 +67,7 @@ exports.signup = async (req, res, next) => {
     }
 };
 
-exports.login = async (req, res, next) => {
+exports.authenticateLoginInfo = async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
@@ -94,7 +81,7 @@ exports.login = async (req, res, next) => {
         if (snapshot.empty)
             return next(new AppError("Incorrect email or password", 401));
         else if (snapshot.docs.length !== 1)
-            return next(new AppError("Có lỗi xảy ra!", 400))
+            return next(new AppError("Error!", 400))
 
         const user = {
             id: snapshot.docs[0].id,
@@ -112,11 +99,14 @@ exports.login = async (req, res, next) => {
     }
 };
 
-exports.logout = (req, res, next) => {
-    res.cookie("jwt", "loggedout", {
-        expires: new Date(Date.now() + 10 * 1000),
-        httpOnly: true,
-    });
+exports.setJwtTokenExpire = (req, res, next) => {
+    if(!req.cookie || !req.cookie.jwt)
+        return next(new AppError("Bad request!", 400))
+    else
+        res.cookie("jwt", "loggedout", {
+            expires: new Date(Date.now() + 10 * 1000),
+            httpOnly: true,
+        });
     next();
 };
 
@@ -148,10 +138,7 @@ exports.isLoggedIn = async (req, res, next) => {
         if (req.cookies.jwt) {
             try {
                 token = req.cookies.jwt;
-                const decoded = await promisify(jwt.verify)(
-                    token,
-                    process.env.JWT_SECRET
-                );
+                const decoded = descryptToken(token);
                 const userObj = {
                     id: decoded.id,
                     email: decoded.email,

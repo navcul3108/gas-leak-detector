@@ -79,17 +79,6 @@ const postLCDData = async(message)=>{
     }
 }
 
-const getTempAndHumidData = async()=>{
-    try{
-        const response = await axiosInstance.get(process.env.TEMP_HUMID_DATA_FEED_URL1);
-        return response.data;
-    }   
-    catch(err){
-        console.error(err.data);
-        return {}
-    }
-}
-
 const postTempAndHumidData = async(temp, humid)=>{
     try{
         if(typeof temp=="number" && 0<=temp<=50 && typeof humid=="number" && 0<=humid<=100){
@@ -153,5 +142,5 @@ const postRelayData = async(turnOn)=>{
 }
 
 
-module.exports = {postLedData, postSpeakerData, postLCDData, getTempAndHumidData, postTempAndHumidData, 
+module.exports = {postLedData, postSpeakerData, postLCDData, postTempAndHumidData, 
                  postGasData, postDRVData, postRelayData}

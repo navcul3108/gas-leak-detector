@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.2",
     "info": {
-        "title": "API Title",
+        "title": "Gas Leak Detector API",
         "version": "1.0"
     },
     "servers": [
@@ -36,23 +36,60 @@
                 "responses": {
                     "200": {
                         "description": "OK",
-                        "headers": {
-                            "Set-Cookie": {
-                                "description": "Set jwt token in cookie"
-                            }
-                        },
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "status": {
-                                            "description": "Status of response"
+                                            "description": "Status of response",
+                                            "example":"success"
                                         },
                                         "token": {
-                                            "description": "Bearer Token"
+                                            "description": "Bearer Token",
+                                            "example": "Bearer Token"
                                         },
                                         "data": {
-                                            "description": "Json object contains name and email of user"
+                                            "description": "Json object contains name and email of user",
+                                            "example": {
+                                                "name": "name",
+                                                "email": "abc@gmail.com"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Bad request!",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "status":{
+                                            "example":"fail"
+                                        },
+                                        "message": {
+                                            "example": "Please provide email or password!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized!",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "status":{
+                                            "example":"fail"
+                                        },
+                                        "message": {
+                                            "example": "Incorrect email or password"
                                         }
                                     }
                                 }
@@ -83,11 +120,6 @@
                                     "password": {
                                         "type": "string",
                                         "format": "password"
-                                    },
-                                    "passwordConfirm": {
-                                        "type": "string",
-                                        "format": "password",
-                                        "description": "Must be the same with password"
                                     }
                                 }
                             }
@@ -114,6 +146,166 @@
                                                 "name": "name",
                                                 "email": "abc@gmail.com"
                                             }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Email already exists",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "status":{
+                                            "example":"fail"
+                                        },
+                                        "error":{
+                                            "example":{
+                                                "statusCode": 400,
+                                                "status": "fail"
+                                            }
+                                        },
+                                        "message": {
+                                            "example": "Email already exists"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/logout":{
+            "summary": "Logout from system",
+            "post": {
+                "responses":{
+                    "200":{
+                        "description": "Cookie has been expired!",
+                        "content":{
+                            "application/json":{
+                                "example": {
+                                    "logout": "success"
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Cookie is incorrect or client haven't logged in yet",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "properties": {
+                                        "status": {
+                                            "example": "fail"
+                                        },
+                                        "message":{
+                                            "example": "Logout failed!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/alarm/turn-on":{
+            "summary": "Turn on alarm",
+            "post":{
+                "responses": {
+                    "200":{
+                        "description": "Alarm has been turned on",
+                        "content":{
+                            "application/json":{
+                                "example": "Alarm has been turned on"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized!",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "status":{
+                                            "example":"fail"
+                                        },
+                                        "message": {
+                                            "example": "You are not logged in! Please log in to get access!!!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Turning on operation is incomplete!",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "status":{
+                                            "example":"error"
+                                        },
+                                        "message": {
+                                            "example": "There is an error while processing request!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/alarm/turn-off":{
+            "summary": "Turn off alarm",
+            "post":{
+                "responses": {
+                    "200":{
+                        "description": "Alarm has been turned off",
+                        "content":{
+                            "application/json":{
+                                "example": "Alarm has been turned off"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized!",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "status":{
+                                            "example":"fail"
+                                        },
+                                        "message": {
+                                            "example": "You are not logged in! Please log in to get access!!!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Turning off operation is incomplete",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "status":{
+                                            "example":"error"
+                                        },
+                                        "message": {
+                                            "example": "There is an error while processing request!"
                                         }
                                     }
                                 }

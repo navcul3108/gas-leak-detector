@@ -11,7 +11,7 @@ router.get("/signup", function (req, res) {
         res.render("users/signup");
 });
 
-router.post("/signup", authController.signup);
+router.post("/signup", authController.createNewUser);
 
 router.get("/login", function (req, res) {
     if(res.locals.user)
@@ -20,8 +20,8 @@ router.get("/login", function (req, res) {
         res.render("users/login");
 });
 
-router.post("/login", authController.login);
-router.post("/logout", authController.logout, (req, res) => {
+router.post("/login", authController.authenticateLoginInfo);
+router.post("/logout", authController.setJwtTokenExpire, (req, res) => {
     res.redirect("/users/login");
 });
 
