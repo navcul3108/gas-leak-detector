@@ -100,7 +100,7 @@ exports.authenticateLoginInfo = async (req, res, next) => {
 };
 
 exports.setJwtTokenExpire = (req, res, next) => {
-    if(!req.cookie || !req.cookie.jwt)
+    if(!req.cookies || !req.cookies.jwt)
         return next(new AppError("Bad request!", 400))
     else
         res.cookie("jwt", "loggedout", {
