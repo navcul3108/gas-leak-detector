@@ -9,6 +9,7 @@ const swaggerDocument = require("./swagger-document.json")
 const indexRouter = require("./routes/index");
 const apiRouter = require("./routes/api")
 const usersRouter = require("./routes/users")
+const deviceRouter = require("./routes/device")
 const {isLoggedIn} = require("./controllers/authController")
 
 const app = express();
@@ -29,6 +30,7 @@ app.use("/api-doc", swaggerUi.serve, swaggerUi.setup(swaggerDocument, {explorer:
 app.use("/api", apiRouter);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/device", deviceRouter);
 
 app.use(function(req, res, next) {
     next(createError(404));

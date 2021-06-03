@@ -1,18 +1,20 @@
 block variables
 doctype html
-html
+html(lang="en")
   head
     title= title? title: "Gas leak detector"
     meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
     meta(name="description" content="")
     meta(name="author" content="")
-    link(rel="stylesheet", href="/stylesheets/bootstrap/bootstrap.min.css")
 
-    link(rel="icon" href="https://seeklogo.com/images/D/dota-2-logo-A8CAC9B4C9-seeklogo.com.png" type="image/x-icon")
+    link(rel="preconnect" href="https://fonts.gstatic.com")
     link(href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet")
-    link(rel="stylesheet" href="/assets/css/templatemo-sixteen.css")
-    link(rel="stylesheet" href="/assets/css/owl.css")
+    link(rel="icon" type="image/png" sizes="32x32" href="/images/icon.png")
+    link(rel="stylesheet", href="/stylesheets/bootstrap/bootstrap.min.css")
+    link(rel="stylesheet" href="/stylesheets/templatemo-sixteen.css")
+    link(rel="stylesheet" href="/stylesheets/owl.css")
     link(rel="stylesheet", href="/stylesheets/style.css")
 
     script(src="https://code.jquery.com/jquery-3.5.1.min.js")
@@ -23,11 +25,12 @@ html
     header
       nav.navbar.navbar-expand-lg
         .container
-          img(src="https://seeklogo.com/images/D/dota-2-logo-A8CAC9B4C9-seeklogo.com.png" style="width:50px;height:50px;margin-left:-30px;margin-right:60px" alt="logo")
-          a.navbar-brand(href="index")
-            h2
-              |Hệ thống phát hiện 
-              em rò rỉ khí Gas
+          a.navbar-brand.d-flex.justify-content-center(href="/")
+            img(src="/images/logo.png" style="object-fit: fill; max-height: 10vh;" alt="logo")
+            .d-flex.align-items-center
+              h2
+                |Hệ thống phát hiện 
+                em rò rỉ khí Gas          
           button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation")
             span.navbar-toggler-icon
           #navbarResponsive.collapse.navbar-collapse
@@ -46,9 +49,9 @@ html
                     a.nav-link(onclick='$("#logout-form").submit()')  Đăng xuất 
               else
                 li.nav-item.active
-                a.nav-link(href="/index")
-                  | Trang chủ
-                  span.sr-only (current)
+                  a.nav-link(href="/index")
+                    | Trang chủ
+                    span.sr-only (current)
                 li.nav-item
                   a.nav-link(href="/users/signup") Đăng ký
                 li.nav-item
@@ -65,8 +68,8 @@ html
             .inner-content
               p
                 | Copyright &copy; 2021 HCMUT
-  script(src="/assets/js/custom.js")
-  script(src="/assets/js/owl.js")
-  script(src="/assets/js/slick.js")
-  script(src="/assets/js/isotope.js")
-  script(src="/assets/js/accordions.js")
+  script(src="/javascripts/custom.js")
+  script(src="/javascripts/owl.js")
+  script(src="/javascripts/slick.js")
+  script(src="/javascripts/isotope.js")
+  script(src="/javascripts/accordions.js")

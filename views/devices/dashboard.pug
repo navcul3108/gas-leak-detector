@@ -1,0 +1,33 @@
+extends ../_layout
+
+block variables 
+  -var title = "Dashboard"
+
+block content
+  link(rel="stylesheet", href="/stylesheets/device.css")
+  .dashboard 
+    .dashboard-header 
+      h3.text-center Trạng thái thiết bị
+    .dashboard-content 
+      .device-info
+        .temperature-chart.d-flex.justify-content-center 
+          canvas(width="800", height="400")#temp-chart
+        .right-side
+          .device-signal 
+            #gas-status.device-status.normal(title="Tình trạng gas")
+              img.filter(src="/images/gas-bottle.svg")
+            #valve-status.device-status.off(title="Van gas")
+              img.filter(src="/images/valve.svg")
+            #pump-status.device-status.off(title="Máy bơm")
+              svg(xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="faucet-drip" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-faucet-drip fa-w-16 fa-3x" width="512" height="512")
+                path(fill="#22B8CF" d="M416,480a32,32,0,0,0,64,0c0-17.67-32-64-32-64S416,462.33,416,480ZM352,192H313.39c-15.71-13.44-35.46-23.07-57.39-28V116.44l-32-3.38-32,3.38V164c-21.93,5-41.68,14.6-57.39,28H16A16,16,0,0,0,0,208v96a16,16,0,0,0,16,16h92.79C129.38,357.73,173,384,224,384s94.62-26.27,115.21-64H352a32,32,0,0,1,32,32,32,32,0,0,0,32,32h64a32,32,0,0,0,32-32A160,160,0,0,0,352,192ZM81.59,95.91,224,80.89l142.41,15c9.42,1,17.59-6.81,17.59-16.8V48.89c0-10-8.17-17.8-17.59-16.8L256,43.74V16A16,16,0,0,0,240,0H208a16,16,0,0,0-16,16V43.74L81.59,32.09C72.17,31.09,64,38.9,64,48.89V79.11C64,89.1,72.17,96.91,81.59,95.91Z") 
+            #ventilitation-status.device-status.off(title="Quạt thông gió")
+              i.fas.fa-3x.fa-fan 
+          .alarm-control
+            button.btn.danger(title="Bật cảnh báo")
+              i.fas.fa-3x.fa-exclamation-circle
+            button.btn.off(title="Tắt cảnh báo")
+              i.fas.fa-3x.fa-power-off    
+      .alarm-history
+  script(src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js") 
+  script(src="/javascripts/device_dashboard.js") 
