@@ -1,0 +1,79 @@
+.dashboard{
+    margin: auto;
+    width: 80%;
+    border-radius: 1em;
+    border: 1px solid #90E0EF;
+    padding: 1em;
+}
+
+.dashboard-header{
+    padding: 1em;
+    color: #03045E;
+    background-color: #ADE8F4;
+}
+
+.temperature-chart{
+    width: 70%;
+}
+
+.device-info{
+    display: flex;
+    justify-content: space-around;
+}
+
+.right-side{
+    width: 25%;
+    display: flexbox;
+    flex-direction: column;
+}
+
+.device-signal{
+    height: inherit;
+    margin: auto;
+    margin-top: 1em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    column-gap: 0.25em;
+    row-gap: 0.25em;
+    padding-bottom: 1em;
+    border-bottom: 0.25em solid #89c2d9;
+}
+
+.alarm-control{
+    margin-top: 1em;
+    display: flex;
+    justify-content: space-around;
+}
+
+.device-status{
+    height: inherit;
+    min-height: 45%;
+    border-radius: 1em;
+    background: #e0e0e0;
+    padding: 2.5em;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #014f86;
+}
+
+.danger{
+    background-color: #dc2f02;
+}
+
+.normal{
+    background-color: #4ad66d;
+}
+
+.off{
+    background-color: #8a817c;
+}
+
+.on{
+    background-color: #f9c74f;
+}
+
+.filter{
+    filter: invert(14%) sepia(59%) saturate(5974%) hue-rotate(193deg) brightness(85%) contrast(99%);
+}

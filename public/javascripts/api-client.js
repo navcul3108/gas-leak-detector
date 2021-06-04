@@ -30,7 +30,7 @@ const postLedData = async(axiosInstance, feedURL, signal) =>{
 const postSpeakerData = async(axiosInstance, feedURL, level)=>{
     try{
         if(typeof level=="number" && 0<=level && level<=1023){
-            let formData = {id:"3", name:"SPEAKER", data:level.toString(), unit: ""};
+            let formData = {id:"2", name:"SPEAKER", data:level.toString(), unit: ""};
             const response = await axiosInstance.post(feedURL, {value: JSON.stringify(formData)});
             return response.status === 200;   
         }
@@ -45,7 +45,7 @@ const postSpeakerData = async(axiosInstance, feedURL, level)=>{
 const postLCDData = async(axiosInstance, feedURL, message)=>{
     try{
         if(typeof message=="string"){
-            let formData = {id:"5", name:"LCD", data:message, unit: ""};
+            let formData = {id:"3", name:"LCD", data:message, unit: ""};
             const response = await axiosInstance.post(feedURL, {value: JSON.stringify(formData)});
             return response.status === 200;   
         }

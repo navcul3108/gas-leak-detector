@@ -15,6 +15,22 @@ const axiosInstance1 = axios.create({
     responseType: "json"
 })
 
+const updateAIOKey = ()=>{
+    axiosInstance.defaults.headers["X-AIO-key"] = process.env.CSE_BBC_KEY;
+    axiosInstance1.defaults.headers["X-AIO-key"] = process.env.CSE_BBC1_KEY;
+}
+
+const requestKey = async()=>{
+    await axios.get("http://dadn.esp32thanhdanh.link/")
+    .then((response)=>{
+        process.env.CSE_BBC_KEY = response.data.keyBBC;
+        process.env.CSE_BBC1_KEY = response.data.keyBBC1;
+    })
+    .catch((err)=>{
+        console.error(err)
+    })
+}
+
 const parseCSVToJSON = (csvLine)=>{
     const splittedArr = csvLine.split(",");
     // Remove duplicate double quote
@@ -24,9 +40,7 @@ const parseCSVToJSON = (csvLine)=>{
     if(jsonDataStr.endsWith(","))
         jsonDataStr = jsonDataStr.substr(0, jsonDataStr.length-2);
 
-    console.log('jsonDataStr :>> ', jsonDataStr);
     const dataObj = JSON.parse(jsonDataStr);
-    console.log('dataObj :>> ', dataObj);
     return dataObj
 }
 
@@ -42,7 +56,15 @@ const postLedData = async(signal) =>{
         return false
     }
     catch(err){
-        console.error(err.data);
+        if(err.response)
+        {
+            console.error(err.reponse.data);
+            if(err.response.status===401){
+                await requestKey();
+                updateAIOKey()
+                return await postLedData(signal)    
+            }
+        }
         return false
     }
 }
@@ -58,7 +80,15 @@ const postSpeakerData = async(level)=>{
         return false;
     }
     catch(err){
-        console.error(err.data)
+        if(err.response)
+        {
+            console.error(err.reponse.data);
+            if(err.response.status===401){
+                await requestKey();
+                updateAIOKey()
+                return await postSpeakerData(level)    
+            }
+        }
         return false;
     }
 }
@@ -66,15 +96,22 @@ const postSpeakerData = async(level)=>{
 const postLCDData = async(message)=>{
     try{
         if(typeof message=="string"){
-            let formData = {id:"5", name:"LCD", data:message, unit: ""};
-            const response = await axiosInstance.post(process.env.LCD_DATA_FEED_URL1, {value: JSON.stringify(formData)});
-            
+            let formData = {id:"3", name:"LCD", data:message, unit: ""};
+            const response = await axiosInstance.post(process.env.LCD_DATA_FEED_URL1, {value: JSON.stringify(formData)});            
             return response.status === 200;   
         }
         return false
     }
     catch(err){
-        console.error(err.data);
+        if(err.response)
+        {
+            console.error(err.reponse.data);
+            if(err.response.status===401){
+                await requestKey();
+                updateAIOKey()
+                return await postLCDData(message)    
+            }
+        }
         return false
     }
 }
@@ -90,7 +127,15 @@ const postTempAndHumidData = async(temp, humid)=>{
         return false
     }
     catch(err){
-        console.error(err.data);
+        if(err.response)
+        {
+            console.error(err.reponse.data);
+            if(err.response.status===401){
+                await requestKey();
+                updateAIOKey()
+                return await postTempAndHumidData(temp, humid)    
+            }
+        }
         return false
     }
 }
@@ -100,11 +145,19 @@ const postGasData = async(isOverThreshold)=>{
         try{
             const formData = {id:"23", name:"GAS", data: isOverThreshold?"1":"0", unit: ""};
             const response = await axiosInstance1.post(process.env.GAS_DATA_FEED_URL1, {value: JSON.stringify(formData)})
-            console.log(response.data)
             return response.status === 200;
         }
         catch(err){
-            console.error(err.data);
+            if(err.response)
+            {
+                console.error(err.reponse.data);
+                if(err.response.status===401){
+                    await requestKey();
+                    updateAIOKey()
+                    return await postGasData(isOverThreshold)    
+                }
+            }
+            return false
         }
     }
 }
@@ -118,7 +171,15 @@ const postDRVData = async(speed)=>{
         }
         catch(err)
         {
-            console.error(err.data);
+            if(err.response)
+            {
+                console.error(err.reponse.data);
+                if(err.response.status===401){
+                    await requestKey();
+                    updateAIOKey()
+                    return await postDRVData(speed)    
+                }
+            }
             return false
         }
     }
@@ -134,7 +195,15 @@ const postRelayData = async(turnOn)=>{
         }
         catch(err)
         {
-            console.error(err.data);
+            if(err.response)
+            {
+                console.error(err.reponse.data);
+                if(err.response.status===401){
+                    await requestKey();
+                    updateAIOKey()
+                    return await postRelayData(turnOn)    
+                }
+            }
             return false
         }
     }
@@ -143,4 +212,4 @@ const postRelayData = async(turnOn)=>{
 
 
 module.exports = {postLedData, postSpeakerData, postLCDData, postTempAndHumidData, 
-                 postGasData, postDRVData, postRelayData}
+                 postGasData, postDRVData, postRelayData, requestKey}
