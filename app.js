@@ -11,10 +11,15 @@ const apiRouter = require("./routes/api")
 const usersRouter = require("./routes/users")
 const deviceRouter = require("./routes/device")
 const {isLoggedIn} = require("./controllers/authController")
+const {requestKey} = require("./utils/AdafruitIO")
 
 const app = express();
 
 const globalErrorHandler = require("./controllers/errorController");
+
+//Request Adafruit key
+requestKey()
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
@@ -26,7 +31,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(isLoggedIn)
-app.use("/api-doc", swaggerUi.serve, swaggerUi.setup(swaggerDocument, {explorer:true}))
+app.use("/api-doc", (req, res, next)=>{
+    swaggerDocument.host = req.get("/")
+    req.swaggerDoc = swaggerDocument;
+    next()
+}, swaggerUi.serve, swaggerUi.setup(swaggerDocument, {explorer:true}))
 app.use("/api", apiRouter);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
