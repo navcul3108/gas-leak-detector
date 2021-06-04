@@ -144,8 +144,8 @@ function initializeChart(feedData) {
         {
           label: "Độ ẩm",
           data: humidData,
-          backgroundColor: "#00b4d8",
-          borderColor: "#00b4d8",
+          backgroundColor: "#90e0ef",
+          borderColor: "#90e0ef",
         }
 
       ],
