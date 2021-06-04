@@ -1,319 +1,385 @@
 {
-    "openapi": "3.0.2",
-    "info": {
-        "title": "Gas Leak Detector API",
-        "version": "1.0"
-    },
-    "servers": [
-        {
-            "url": "https://mysterious-reaches-12750.herokuapp.com/api",
-            "description": "API server"
-        }
-    ],
-    "paths": {
-        "/users/login": {
-            "post": {
-                "summary": "Request Bearer Token to login",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "email": {
-                                        "type": "string",
-                                        "format": "email"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "format": "password"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "status": {
-                                            "description": "Status of response",
-                                            "example":"success"
-                                        },
-                                        "token": {
-                                            "description": "Bearer Token",
-                                            "example": "Bearer Token"
-                                        },
-                                        "data": {
-                                            "description": "Json object contains name and email of user",
-                                            "example": {
-                                                "name": "name",
-                                                "email": "abc@gmail.com"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400":{
-                        "description": "Bad request!",
-                        "content": {
-                            "application/json":{
-                                "schema":{
-                                    "type": "object",
-                                    "properties": {
-                                        "status":{
-                                            "example":"fail"
-                                        },
-                                        "message": {
-                                            "example": "Please provide email or password!"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized!",
-                        "content": {
-                            "application/json":{
-                                "schema":{
-                                    "type": "object",
-                                    "properties": {
-                                        "status":{
-                                            "example":"fail"
-                                        },
-                                        "message": {
-                                            "example": "Incorrect email or password"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/users/signup": {
-            "post": {
-                "summary": "Signup an account",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "description": "User's full name"
-                                    },
-                                    "email": {
-                                        "type": "string",
-                                        "format": "email"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "format": "password"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "New account has been created in the system",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "status": {
-                                            "description": "Status of response"
-                                        },
-                                        "token": {
-                                            "description": "Bearer Token"
-                                        },
-                                        "data": {
-                                            "description": "Json object contains name and email of user",
-                                            "type": "object",
-                                            "example": {
-                                                "name": "name",
-                                                "email": "abc@gmail.com"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Email already exists",
-                        "content": {
-                            "application/json":{
-                                "schema":{
-                                    "type": "object",
-                                    "properties": {
-                                        "status":{
-                                            "example":"fail"
-                                        },
-                                        "error":{
-                                            "example":{
-                                                "statusCode": 400,
-                                                "status": "fail"
-                                            }
-                                        },
-                                        "message": {
-                                            "example": "Email already exists"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/users/logout":{
-            "summary": "Logout from system",
-            "post": {
-                "responses":{
-                    "200":{
-                        "description": "Cookie has been expired!",
-                        "content":{
-                            "application/json":{
-                                "example": {
-                                    "logout": "success"
-                                }
-                            }
-                        }
-                    },
-                    "400":{
-                        "description": "Cookie is incorrect or client haven't logged in yet",
-                        "content": {
-                            "application/json":{
-                                "schema":{
-                                    "properties": {
-                                        "status": {
-                                            "example": "fail"
-                                        },
-                                        "message":{
-                                            "example": "Logout failed!"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/alarm/turn-on":{
-            "summary": "Turn on alarm",
-            "post":{
-                "responses": {
-                    "200":{
-                        "description": "Alarm has been turned on",
-                        "content":{
-                            "application/json":{
-                                "example": "Alarm has been turned on"
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized!",
-                        "content": {
-                            "application/json":{
-                                "schema":{
-                                    "type": "object",
-                                    "properties": {
-                                        "status":{
-                                            "example":"fail"
-                                        },
-                                        "message": {
-                                            "example": "You are not logged in! Please log in to get access!!!"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Turning on operation is incomplete!",
-                        "content": {
-                            "application/json":{
-                                "schema":{
-                                    "type": "object",
-                                    "properties": {
-                                        "status":{
-                                            "example":"error"
-                                        },
-                                        "message": {
-                                            "example": "There is an error while processing request!"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/alarm/turn-off":{
-            "summary": "Turn off alarm",
-            "post":{
-                "responses": {
-                    "200":{
-                        "description": "Alarm has been turned off",
-                        "content":{
-                            "application/json":{
-                                "example": "Alarm has been turned off"
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized!",
-                        "content": {
-                            "application/json":{
-                                "schema":{
-                                    "type": "object",
-                                    "properties": {
-                                        "status":{
-                                            "example":"fail"
-                                        },
-                                        "message": {
-                                            "example": "You are not logged in! Please log in to get access!!!"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Turning off operation is incomplete",
-                        "content": {
-                            "application/json":{
-                                "schema":{
-                                    "type": "object",
-                                    "properties": {
-                                        "status":{
-                                            "example":"error"
-                                        },
-                                        "message": {
-                                            "example": "There is an error while processing request!"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Gas Leak Detector API",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://mysterious-reaches-12750.herokuapp.com/api",
+      "description": "API server"
     }
+  ],
+  "paths": {
+    "/users/login": {
+      "post": {
+        "tags": ["/users"],
+        "summary": "Request Bearer Token to login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "format": "status",
+                      "example": "success"
+                    },
+                    "token": {
+                      "type": "string",
+                      "format": "token",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ikp6ZFhNT2Z2aW5lZzhmeHdKdnR0IiwibmFtZSI6IkFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2MjI3NjkzNTIsImV4cCI6MTYyMjg1NTc1Mn0.0WlT2D7tVLWFpBJmFtFQUNJh2hzGvcNwg9wU2bIZMbs"
+                    },
+                    "data": {
+                      "type": "object",
+                      "example": {
+                        "name": "name",
+                        "email": "abc@gmail.com"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "example": "fail"
+                    },
+                    "message": {
+                      "example": "Please provide email or password!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "example": "fail"
+                    },
+                    "message": {
+                      "example": "Incorrect email or password"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/signup": {
+      "post": {
+        "tags": ["/users"],
+        "summary": "Signup an account",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "format": "string",
+                    "description": "User's full name"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "New account has been created in the system",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "format": "status",
+                      "example": "success"
+                    },
+                    "token": {
+                      "type": "string",
+                      "format": "token",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ikp6ZFhNT2Z2aW5lZzhmeHdKdnR0IiwibmFtZSI6IkFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2MjI3NjkzNTIsImV4cCI6MTYyMjg1NTc1Mn0.0WlT2D7tVLWFpBJmFtFQUNJh2hzGvcNwg9wU2bIZMbs"
+                    },
+                    "data": {
+                      "type": "object",
+                      "example": {
+                        "name": "name",
+                        "email": "abc@gmail.com"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "example": "fail"
+                    },
+                    "message": {
+                      "example": "Email already exists"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/logout": {
+      "summary": "Logout from system",
+      "post": {
+        "tags": ["/users"],
+        "summary": "Set token to be expired",
+        "responses": {
+          "200": {
+            "description": "Cookie has been expired!",
+            "content": {
+              "application/json": {
+                "example": {
+                  "logout": "success"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Cookie is incorrect or client haven't logged in yet",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "example": "fail"
+                    },
+                    "message": {
+                      "example": "Logout failed!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alarm/turn-on": {
+      "post": {
+        "tags": ["/alarm"],
+        "summary": "Turn on alarm",
+        "requestBody":{
+          "content": {
+            "application/json":{
+              "schema":{
+                "properties": {
+                  "gas": {
+                    "type": "boolean",
+                    "example": "1"
+                  },
+                  "temperature":{
+                    "type": "number",
+                    "example": "45"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Alarm has been turned on",
+            "content": {
+              "application/json": {
+                "example": "Alarm has been turned on"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "example": "fail"
+                    },
+                    "message": {
+                      "example": "You are not logged in! Please log in to get access!!!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Turning on operation is incomplete!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "example": "error"
+                    },
+                    "message": {
+                      "example": "There is an error while processing request!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alarm/turn-off": {
+      "post": {
+        "tags": ["/alarm"],
+        "summary": "Turn off alarm",
+        "responses": {
+          "200": {
+            "description": "Alarm has been turned off",
+            "content": {
+              "application/json": {
+                "example": "Alarm has been turned off"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "example": "fail"
+                    },
+                    "message": {
+                      "example": "You are not logged in! Please log in to get access!!!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Turning off operation is incomplete",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "example": "error"
+                    },
+                    "message": {
+                      "example": "There is an error while processing request!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alarm/all-alarms":{
+      "get":{
+        "tags": ["/alarm"],
+        "summary": "Get all alarm of this user",
+        "responses": {
+          "200":{
+            "description": "OK",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "items":{    
+                    "example":{
+                      "userEmail":  "user@gmail.com",
+                      "gas":"1",
+                      "temperature":"45",
+                      "timestamp": "2021-06-03T00:00:00Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "example": "fail"
+                    },
+                    "message": {
+                      "example": "You are not logged in! Please log in to get access!!!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
