@@ -338,10 +338,10 @@
         }
       }
     },
-    "/alarm/all-alarms":{
+    "/alarm/history":{
       "get":{
         "tags": ["/alarm"],
-        "summary": "Get all alarm of this user",
+        "summary": "Alarm history of this user",
         "responses": {
           "200":{
             "description": "OK",

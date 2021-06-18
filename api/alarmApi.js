@@ -50,7 +50,7 @@ router.post("/turn-off", (req, res)=>{
         })
 })
 
-router.get("/all-alarm", async(req, res, next)=>{
+router.get("/history", async(req, res, next)=>{
     const userEmail = res.locals.user.email;
     const data = (await Alarm.where("userEmail", "==", userEmail).get()).docs
         .map((doc)=> {
