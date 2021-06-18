@@ -8,6 +8,7 @@ admin.initializeApp({
 const db = admin.firestore();
 const User = db.collection("users");
 const Alarm = db.collection("alarm")
+const Temperature = db.collection("temperatue");
 
 const addNewAlarm = async(userEmail, data={}, timestamp=new Date())=>{
   if(!userEmail)
@@ -21,4 +22,4 @@ const addNewAlarm = async(userEmail, data={}, timestamp=new Date())=>{
   })
   return true
 }
-module.exports = {User, Alarm, addNewAlarm};
+module.exports = {Temperature, User, Alarm, addNewAlarm};
