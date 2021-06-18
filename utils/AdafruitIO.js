@@ -56,15 +56,6 @@ const postLedData = async(signal) =>{
         return false
     }
     catch(err){
-        if(err.response)
-        {
-            console.error(err.reponse.data);
-            if(err.response.status===401){
-                await requestKey();
-                updateAIOKey()
-                return await postLedData(signal)    
-            }
-        }
         return false
     }
 }
@@ -80,15 +71,6 @@ const postSpeakerData = async(level)=>{
         return false;
     }
     catch(err){
-        if(err.response)
-        {
-            console.error(err.reponse.data);
-            if(err.response.status===401){
-                await requestKey();
-                updateAIOKey()
-                return await postSpeakerData(level)    
-            }
-        }
         return false;
     }
 }
@@ -103,15 +85,6 @@ const postLCDData = async(message)=>{
         return false
     }
     catch(err){
-        if(err.response)
-        {
-            console.error(err.reponse.data);
-            if(err.response.status===401){
-                await requestKey();
-                updateAIOKey()
-                return await postLCDData(message)    
-            }
-        }
         return false
     }
 }
@@ -127,15 +100,6 @@ const postTempAndHumidData = async(temp, humid)=>{
         return false
     }
     catch(err){
-        if(err.response)
-        {
-            console.error(err.reponse.data);
-            if(err.response.status===401){
-                await requestKey();
-                updateAIOKey()
-                return await postTempAndHumidData(temp, humid)    
-            }
-        }
         return false
     }
 }
@@ -148,15 +112,15 @@ const postGasData = async(isOverThreshold)=>{
             return response.status === 200;
         }
         catch(err){
-            if(err.response)
-            {
-                console.error(err.reponse.data);
-                if(err.response.status===401){
-                    await requestKey();
-                    updateAIOKey()
-                    return await postGasData(isOverThreshold)    
-                }
-            }
+            // if(err.response)
+            // {
+            //     console.error(err.reponse.data);
+            //     if(err.response.status===401){
+            //         await requestKey();
+            //         updateAIOKey()
+            //         return await postGasData(isOverThreshold)    
+            //     }
+            // }
             return false
         }
     }
@@ -171,15 +135,15 @@ const postDRVData = async(speed)=>{
         }
         catch(err)
         {
-            if(err.response)
-            {
-                console.error(err.reponse.data);
-                if(err.response.status===401){
-                    await requestKey();
-                    updateAIOKey()
-                    return await postDRVData(speed)    
-                }
-            }
+            // if(err.response)
+            // {
+            //     console.error(err.reponse.data);
+            //     if(err.response.status===401){
+            //         await requestKey();
+            //         updateAIOKey()
+            //         return await postDRVData(speed)    
+            //     }
+            // }
             return false
         }
     }
@@ -195,15 +159,15 @@ const postRelayData = async(turnOn)=>{
         }
         catch(err)
         {
-            if(err.response)
-            {
-                console.error(err.reponse.data);
-                if(err.response.status===401){
-                    await requestKey();
-                    updateAIOKey()
-                    return await postRelayData(turnOn)    
-                }
-            }
+            // if(err.response)
+            // {
+            //     console.error(err.reponse.data);
+            //     if(err.response.status===401){
+            //         await requestKey();
+            //         updateAIOKey()
+            //         return await postRelayData(turnOn)    
+            //     }
+            // }
             return false
         }
     }
@@ -212,4 +176,4 @@ const postRelayData = async(turnOn)=>{
 
 
 module.exports = {postLedData, postSpeakerData, postLCDData, postTempAndHumidData, 
-                 postGasData, postDRVData, postRelayData, requestKey}
+                 postGasData, postDRVData, postRelayData}
