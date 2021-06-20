@@ -34,7 +34,7 @@ client.on("message", function(topic, message) {
 
 
 // timeloop = 3h 
-let timeLoop = 3 * 60 * 1000;
+let timeLoop = 3 * 60 * 60 * 1000;
 setInterval(function() {
   let timestamp = new Date();
   let valueAdd = listTemp.length > 0 ? Math.max(...listTemp) : -1;
