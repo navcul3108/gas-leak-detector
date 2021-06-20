@@ -21,16 +21,13 @@ router.post("/get", async (req, res, next)=>{
         let year = date.getFullYear() - 1969;
         let month = date.getMonth() + 1;
         let day = date.getDate();
-        let hours = date.getHours();
         console.log(year, month, day)
         if (day == _day && month == _month && year == _year) 
             result.push({
                 temmperature: el.temperature, 
-                date: _day,
-                hours,
+                date: date.toISOString()
             });
     })
-    console.log();
     res.status(200).json(result)
     
 })
