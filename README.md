@@ -4,7 +4,7 @@
 `npm install`
 
 ### Debug with nodemon, restart server whenever there is a change on JS files
-`npm run test`
+`npm run dev`
 
 Access server at `localhost:3000`, go to **Thiết bị** in order to test with Adafruit IO.
 
