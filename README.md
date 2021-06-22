@@ -11,13 +11,13 @@ Access server at `localhost:3000`, go to **Thiết bị** in order to test with 
 ### Adafruit feed links
 |Device|Feeds link|
 |------|----------|
-|LED|https://io.adafruit.com/navcul3108/feeds/kkllm-iot-led|
-|LCD SCREEN|https://io.adafruit.com/navcul3108/feeds/kkllm-iot-lcd|
-|SPEAKER|https://io.adafruit.com/navcul3108/feeds/kkllm-iot-speaker|
-|TEMPERATURE AND HUMID SENSOR|https://io.adafruit.com/navcul3108/feeds/kkllm-iot-temp-humid|
-|GAS SENSOR|https://io.adafruit.com/navcul3108/feeds/kkllm-iot-gas|
-|DRV |https://io.adafruit.com/navcul3108/feeds/kkllm-iot-drv|
-|RELAY |https://io.adafruit.com/navcul3108/feeds/kkllm-iot-relay|
+|LED|https://io.adafruit.com/navcul3108/feeds/bk-iot-led|
+|LCD SCREEN|https://io.adafruit.com/navcul3108/feeds/bk-iot-lcd|
+|SPEAKER|https://io.adafruit.com/navcul3108/feeds/bk-iot-speaker|
+|TEMPERATURE AND HUMID SENSOR|https://io.adafruit.com/navcul3108/feeds/bk-iot-temp-humid|
+|GAS SENSOR|https://io.adafruit.com/navcul3108/feeds/bk-iot-gas|
+|DRV |https://io.adafruit.com/navcul3108/feeds/bk-iot-drv|
+|RELAY |https://io.adafruit.com/navcul3108/feeds/bk-iot-relay|
 ### CSE adafruit keys
 |Username|Devices|Key|
 |--------|-------|----|
