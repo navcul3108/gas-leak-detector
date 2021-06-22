@@ -21,7 +21,7 @@ block content
   script(src="/javascripts/socket.io/socket.io.min.js")
   script.
     var messages = document.getElementById("messages")
-    var socket = io("ws://localhost:3000");
+    var socket = io("ws://mysterious-reaches-12750.herokuapp.com");
     socket.on("tempHumid", function(obj){
       let item = document.createElement('li');
       item.textContent = JSON.stringify(obj);
@@ -39,4 +39,10 @@ block content
       item.textContent = JSON.stringify(obj);
       item.style.color = "yellow";
       messages.appendChild(item);      
+    })
+    socket.on("relay", function(obj){
+      let item = document.createElement('li');
+      item.textContent = JSON.stringify(obj);
+      item.style.color = "black";
+      messages.appendChild(item);
     })

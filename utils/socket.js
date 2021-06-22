@@ -48,7 +48,7 @@ const subscribeAdafruit = (socketServer)=>{
     client2.on("connect", ()=>{
         // Todo: RELAY
         client2.subscribe(process.env.GAS_FEED_MQTT);
-        client2.subscribe(process.env.RELAY_MQTT);
+        client2.subscribe(process.env.RELAY_FEED_MQTT);
 
         client2.on("message", async(topic, payload)=>{
             const jsonData = JSON.parse(payload.toString());
