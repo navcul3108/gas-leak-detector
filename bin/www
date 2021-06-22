@@ -17,7 +17,6 @@ dotenv.config({ path: "./config.env" });
 var app = require("../app");
 var debug = require("debug")("webapp:server");
 var http = require("http");
-
 /**
  * Get port from environment and store in Express.
  */
@@ -30,6 +29,19 @@ app.set("port", port);
  */
 
 var server = http.createServer(app);
+const {Server} = require("socket.io");
+const io = new Server(server);
+const {subscribeAdafruit} = require("../utils/socket")
+
+io.on("connection", (socket)=>{
+  console.log('Connected');
+  socket.send("Hello");
+  socket.on("disconnect", ()=>{
+    console.log("Disconnected!")
+  })
+})
+
+subscribeAdafruit(io)
 
 /**
  * Listen on provided port, on all network interfaces.

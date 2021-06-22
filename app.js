@@ -40,6 +40,9 @@ app.use("/api", apiRouter);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/device", deviceRouter);
+app.get("/socket", (req, res)=>{
+    res.render("socket");
+})
 
 app.use(function(req, res, next) {
     next(createError(404));

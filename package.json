@@ -32,6 +32,7 @@
     "mqtt": "^4.2.6",
     "nodemon": "^2.0.7",
     "pug": "3.0.2",
+    "socket.io": "^4.1.2",
     "swagger-ui-express": "^4.1.6",
     "util-promisify": "^2.1.0",
     "util-promisifyall": "^1.0.6"
