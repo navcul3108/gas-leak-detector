@@ -26,11 +26,8 @@ const turnOnAlarm = async(temperature, gas)=>{
 const subscribeAdafruit = async(socketServer)=>{
     let [temperature, gas, relay ] = await getLastestData();
     socketServer.on("connection", (socket)=>{
-        socket.emit("lastest", [temperature, gas, relay]);
-        //socket.send("Hello");
-        socket.on("disconnect", ()=>{
-          console.log("Disconnected!")
-        })
+        //console.log("Connected");
+        socketServer.emit("lastest", [temperature, gas, relay]);
     })
 
     const url1 = `mqtts://${process.env.ADA_USERNAME}:${process.env.ADAFRUIT_KEY}@io.adafruit.com`;

@@ -21,10 +21,11 @@ block content
   script(src="/javascripts/socket.io/socket.io.min.js")
   script.
     var messages = document.getElementById("messages")
-    var socket = io("ws://mysterious-reaches-12750.herokuapp.com");
+    //var socket = io("ws://mysterious-reaches-12750.herokuapp.com");
+    var socket = io("ws://localhost:3000");
     socket.on("lastest", function(arr){
       let item = document.createElement('li');
-      item.textContent = JSON.stringify(obj);
+      item.textContent = JSON.stringify(arr);
       item.style.color = "#219ebc";
       messages.appendChild(item);
     })
