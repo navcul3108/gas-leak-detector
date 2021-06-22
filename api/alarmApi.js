@@ -33,7 +33,7 @@ router.post("/turn-on", (req, res, next)=>{
         })
 })
 
-router.post("/turn-off", (req, res)=>{
+router.post("/turn-off", (req, res, next)=>{
     const turnOffSpeaker = postSpeakerData(0)
     const turnOffAlarm = postRelayData(false)
     const alarmMessage = postLCDData("Turned off")

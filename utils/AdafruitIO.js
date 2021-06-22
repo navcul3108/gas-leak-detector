@@ -8,12 +8,12 @@ const axiosInstance = axios.create({
     responseType: "json"
 })
 
-// const axiosInstance1 = axios.create({
-//     headers: {
-//         "X-AIO-key": process.env.ADAFRUIT_KEY
-//     },
-//     responseType: "json"
-// })
+const axiosInstance1 = axios.create({
+    headers: {
+        "X-AIO-key": process.env.ADAFRUIT_KEY1
+    },
+    responseType: "json"
+})
 
 // const updateAIOKey = ()=>{
 //     axiosInstance.defaults.headers["X-AIO-key"] = process.env.CSE_BBC_KEY;
@@ -108,19 +108,10 @@ const postGasData = async(isOverThreshold)=>{
     if(typeof isOverThreshold=="boolean"){
         try{
             const formData = {id:"23", name:"GAS", data: isOverThreshold?"1":"0", unit: ""};
-            const response = await axiosInstance.post(process.env.GAS_DATA_FEED_URL, {value: JSON.stringify(formData)})
+            const response = await axiosInstance1.post(process.env.GAS_DATA_FEED_URL, {value: JSON.stringify(formData)})
             return response.status === 200;
         }
         catch(err){
-            // if(err.response)
-            // {
-            //     console.error(err.reponse.data);
-            //     if(err.response.status===401){
-            //         await requestKey();
-            //         updateAIOKey()
-            //         return await postGasData(isOverThreshold)    
-            //     }
-            // }
             return false
         }
     }
@@ -135,15 +126,6 @@ const postDRVData = async(speed)=>{
         }
         catch(err)
         {
-            // if(err.response)
-            // {
-            //     console.error(err.reponse.data);
-            //     if(err.response.status===401){
-            //         await requestKey();
-            //         updateAIOKey()
-            //         return await postDRVData(speed)    
-            //     }
-            // }
             return false
         }
     }
@@ -154,20 +136,11 @@ const postRelayData = async(turnOn)=>{
     if(typeof turnOn=="boolean"){
         try{
             const formData = {id:"11", name:"RELAY", data: turnOn? "1":"0", unit: ""};
-            const response = await axiosInstance.post(process.env.RELAY_DATA_FEED_URL, {value: JSON.stringify(formData)})
+            const response = await axiosInstance1.post(process.env.RELAY_DATA_FEED_URL, {value: JSON.stringify(formData)})
             return response.status == 200;
         }
         catch(err)
         {
-            // if(err.response)
-            // {
-            //     console.error(err.reponse.data);
-            //     if(err.response.status===401){
-            //         await requestKey();
-            //         updateAIOKey()
-            //         return await postRelayData(turnOn)    
-            //     }
-            // }
             return false
         }
     }

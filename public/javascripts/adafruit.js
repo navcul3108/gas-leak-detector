@@ -1,4 +1,4 @@
-import  {postLedData, postGasData, postLCDData, postSpeakerData, postTempAndHumidData, postDRVData, getLastestData, postRelayData} from "./api-client.js";
+import  {postLedData, postGasData, postLCDData, postSpeakerData, postTempAndHumidData, postDRVData, postRelayData} from "./api-client.js";
 
 var axiosInstance = null;
 var userName = null, feedsURL = null, AIOkey = null;
