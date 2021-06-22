@@ -35,10 +35,10 @@ const parseCSVToJSON = (csvLine)=>{
     const splittedArr = csvLine.split(",");
     // Remove duplicate double quote
     let jsonDataStr = splittedArr.slice(0, splittedArr.length-3).join(",").replace(/""/g, '"');
-    if(jsonDataStr.startsWith(","))
+    if(jsonDataStr.startsWith('"'))
         jsonDataStr = jsonDataStr.substr(1);
-    if(jsonDataStr.endsWith(","))
-        jsonDataStr = jsonDataStr.substr(0, jsonDataStr.length-2);
+    if(jsonDataStr.endsWith('"'))
+        jsonDataStr = jsonDataStr.substr(0, jsonDataStr.length-1);
 
     const dataObj = JSON.parse(jsonDataStr);
     return dataObj
@@ -147,22 +147,22 @@ const postRelayData = async(turnOn)=>{
     return false;
 }
 
-const getLatestGasAndRelayData = async()=>{
+const getLastestData = async()=>{
     try{
         let response = await axiosInstance.get(process.env.GAS_DATA_FEED_URL+"/retain");
-        let lastestGas = parceCSVToJSON(response.data).data === "1"; // temp-humid
+        let lastestGas = parseCSVToJSON(response.data).data; // temp-humid
         response = await axiosInstance1.get(process.env.RELAY_DATA_FEED_URL+"/retain")
         let lastestRelay = parseCSVToJSON(response.data).data;
         response = await axiosInstance1.get(process.env.TEMP_HUMID_DATA_FEED_URL+"/retain")
-        let lastestTemp = parceCSVToJSON(response.data).data.split("-")[0]; // temp-humid
+        let lastestTemp = parseCSVToJSON(response.data).data.split("-")[0]; // temp-humid
         lastestTemp = parseInt(lastestTemp);
         return [lastestTemp, lastestGas, lastestRelay]
     }
     catch(err){
         console.error(err);
-        return ["25", false, "0"];
+        return ["25", "0", "0"]; // return default values
     }
 }
 
 module.exports = {postLedData, postSpeakerData, postLCDData, postTempAndHumidData, 
-                 postGasData, postDRVData, postRelayData, getLatestGasAndRelayData}
+                 postGasData, postDRVData, postRelayData, getLastestData}

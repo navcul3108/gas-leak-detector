@@ -1,5 +1,5 @@
 const mqtt = require("mqtt")
-const {postSpeakerData, postRelayData, postLCDData, getLatestData} = require("./AdafruitIO")
+const {postSpeakerData, postRelayData, postLCDData, getLastestData} = require("./AdafruitIO")
 const {addNewAlarm} = require("../models/Models")
 
 const errorCb = (err)=>{
@@ -24,7 +24,7 @@ const turnOnAlarm = async(temperature, gas)=>{
 }
 
 const subscribeAdafruit = async(socketServer)=>{
-    let [temperature, gas, relay ] = await getLatestData();
+    let [temperature, gas, relay ] = await getLastestData();
     socketServer.on("connection", (socket)=>{
         socket.emit("lastest", [temperature, gas, relay]);
         //socket.send("Hello");
