@@ -1,5 +1,5 @@
 const mqtt = require("mqtt")
-const {postSpeakerData, postRelayData, postLCDData} = require("./AdafruitIO")
+const {postSpeakerData, postRelayData, postLCDData, getLatestData} = require("./AdafruitIO")
 const {addNewAlarm} = require("../models/Models")
 
 const errorCb = (err)=>{
@@ -23,12 +23,20 @@ const turnOnAlarm = async(temperature, gas)=>{
     }
 }
 
-const subscribeAdafruit = (socketServer)=>{
+const subscribeAdafruit = async(socketServer)=>{
+    let [temperature, gas, relay ] = await getLatestData();
+    socketServer.on("connection", (socket)=>{
+        socket.emit("lastest", [temperature, gas, relay]);
+        //socket.send("Hello");
+        socket.on("disconnect", ()=>{
+          console.log("Disconnected!")
+        })
+    })
+
     const url1 = `mqtts://${process.env.ADA_USERNAME}:${process.env.ADAFRUIT_KEY}@io.adafruit.com`;
     const url2 = `mqtts://${process.env.ADA_USERNAME1}:${process.env.ADAFRUIT_KEY1}@io.adafruit.com`;
     const client1 = mqtt.connect(url1);
     const client2 = mqtt.connect(url2);
-    let temperature = 25, gasOverThreshold = false;
     client1.on("connect", ()=>{
         client1.subscribe(process.env.TEMP_HUMID_FEED_MQTT, errorCb);
 

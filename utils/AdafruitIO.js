@@ -147,6 +147,22 @@ const postRelayData = async(turnOn)=>{
     return false;
 }
 
+const getLatestGasAndRelayData = async()=>{
+    try{
+        let response = await axiosInstance.get(process.env.GAS_DATA_FEED_URL+"/retain");
+        let lastestGas = parceCSVToJSON(response.data).data === "1"; // temp-humid
+        response = await axiosInstance1.get(process.env.RELAY_DATA_FEED_URL+"/retain")
+        let lastestRelay = parseCSVToJSON(response.data).data;
+        response = await axiosInstance1.get(process.env.TEMP_HUMID_DATA_FEED_URL+"/retain")
+        let lastestTemp = parceCSVToJSON(response.data).data.split("-")[0]; // temp-humid
+        lastestTemp = parseInt(lastestTemp);
+        return [lastestTemp, lastestGas, lastestRelay]
+    }
+    catch(err){
+        console.error(err);
+        return ["25", false, "0"];
+    }
+}
 
 module.exports = {postLedData, postSpeakerData, postLCDData, postTempAndHumidData, 
-                 postGasData, postDRVData, postRelayData}
+                 postGasData, postDRVData, postRelayData, getLatestGasAndRelayData}

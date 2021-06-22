@@ -22,6 +22,12 @@ block content
   script.
     var messages = document.getElementById("messages")
     var socket = io("ws://mysterious-reaches-12750.herokuapp.com");
+    socket.on("lastest", function(arr){
+      let item = document.createElement('li');
+      item.textContent = JSON.stringify(obj);
+      item.style.color = "#219ebc";
+      messages.appendChild(item);
+    })
     socket.on("tempHumid", function(obj){
       let item = document.createElement('li');
       item.textContent = JSON.stringify(obj);
