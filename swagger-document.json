@@ -11,6 +11,50 @@
     }
   ],
   "paths": {
+    "/temperature/daily-data": {
+      "get": {
+        "tags": ["/temperature"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "schema": {
+
+            },
+            "required": true,
+            "example": "06-21-2021"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json":{
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "example":{
+                          "time": "06/21/2021 15:27:26 PM",
+                          "temperature": 15
+                        }
+                      }    
+                    },
+                    "max":{
+                      "example": 46
+                    },
+                    "min": {
+                      "example": 28
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users/login": {
       "post": {
         "tags": ["/users"],
