@@ -153,10 +153,16 @@ const getLastestData = async()=>{
         let lastestGas = parseCSVToJSON(response.data).data; // temp-humid
         response = await axiosInstance1.get(process.env.RELAY_DATA_FEED_URL+"/retain")
         let lastestRelay = parseCSVToJSON(response.data).data;
-        response = await axiosInstance1.get(process.env.TEMP_HUMID_DATA_FEED_URL+"/retain")
-        let lastestTemp = parseCSVToJSON(response.data).data.split("-")[0]; // temp-humid
-        lastestTemp = parseInt(lastestTemp);
-        return [lastestTemp, lastestGas, lastestRelay]
+        response = await axiosInstance1.get(process.env.TEMP_HUMID_DATA_FEED_URL+"?limit=8")
+        let rawData = response.data;
+        let temperatureData = rawData.map((record)=>{
+            const jsonData = JSON.parse(record.value);
+            return {
+                temperature: parseInt(jsonData.data.split("-")[0]),
+                time: record.created_at
+            }
+        })
+        return [temperatureData, lastestGas, lastestRelay]
     }
     catch(err){
         console.error(err);
@@ -164,5 +170,13 @@ const getLastestData = async()=>{
     }
 }
 
+const turnOnSpeaker = postSpeakerData(500)
+const turnOnAlarm = postRelayData(true)
+const showDangerMessage = postLCDData("Danger!!")
+const turnOffSpeaker = postSpeakerData(0)
+const turnOffAlarm = postRelayData(false)
+const showMessage = postLCDData("Turned off")
+
 module.exports = {postLedData, postSpeakerData, postLCDData, postTempAndHumidData, 
-                 postGasData, postDRVData, postRelayData, getLastestData}
+                 postGasData, postDRVData, postRelayData, getLastestData,
+                turnOffAlarm, turnOnAlarm, turnOnSpeaker, turnOffSpeaker, showDangerMessage, showMessage}

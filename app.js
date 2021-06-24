@@ -11,14 +11,10 @@ const apiRouter = require("./routes/api")
 const usersRouter = require("./routes/users")
 const deviceRouter = require("./routes/device")
 const {isLoggedIn} = require("./controllers/authController")
-//const {requestKey} = require("./utils/AdafruitIO")
 
 const app = express();
 
 const globalErrorHandler = require("./controllers/errorController");
-
-//Request Adafruit key
-//requestKey()
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

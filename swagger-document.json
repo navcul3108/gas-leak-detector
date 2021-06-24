@@ -424,6 +424,28 @@
           }
         }
       }
+    },
+    "/alarm/state": {
+      "get": {
+        "tags": ["/alarm"],
+        "description": "State of alarm",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema":{
+                  "properties": {
+                    "state":{
+                      "example": "on"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

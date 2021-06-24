@@ -7,11 +7,11 @@ const errorCb = (err)=>{
         console.error(err);
 }
 
-const turnOnAlarm = async(temperature, gas)=>{
+const turnOnAlarm = async(temperature, gas, userEmail="default@gmail.com")=>{
     const turnOnSpeaker = postSpeakerData(500)
     const turnOnAlarm = postRelayData(true)
     const alarmMessage = postLCDData("Danger!!")
-    const recordAlarm = addNewAlarm("default@gmail.com", {gas, temperature})
+    const recordAlarm = addNewAlarm(userEmail, {gas, temperature})
 
     try{
         const results = await Promise.all([turnOnSpeaker, turnOnAlarm, alarmMessage, recordAlarm])
@@ -23,11 +23,32 @@ const turnOnAlarm = async(temperature, gas)=>{
     }
 }
 
+const turnOffAlarm = ()=>{
+    const turnOffSpeaker = postSpeakerData(0)
+    const turnOffAlarm = postRelayData(false)
+    const showMessage = postLCDData("Turned off")
+    setTimeout(()=>{
+        if(global.alarm){
+            Promise.all([turnOffSpeaker, turnOffAlarm, showMessage])
+                .then((results)=>{
+                    if(results.reduce((acc, cur)=>acc&&cur)){
+                        global.alarm = false
+                    }                                
+                })
+                .catch((err)=>{
+                    console.error(err);
+                })
+        }
+    }, 300000)
+}
+
 const subscribeAdafruit = async(socketServer)=>{
-    let [temperature, gas, relay ] = await getLastestData();
+    let [temperatureData, gas, relay ] = await getLastestData();
+    let temperature = temperatureData[temperatureData.length-1].temperature;
+    global.alarm = relay === "1"
     socketServer.on("connection", (socket)=>{
         //console.log("Connected");
-        socketServer.emit("lastest", [temperature, gas, relay]);
+        socketServer.emit("lastest", {temperatureData, gas, relay});
     })
 
     const url1 = `mqtts://${process.env.ADA_USERNAME}:${process.env.ADAFRUIT_KEY}@io.adafruit.com`;
@@ -43,8 +64,11 @@ const subscribeAdafruit = async(socketServer)=>{
             temperature = parseInt(jsonData.data.split("-")[0]);
             if(temperature>40){
                 const success = await turnOnAlarm(temperature, gasOverThreshold);
-                if(success)
+                if(success){
+                    global.alarm = true;
                     socketServer.emit("alarm", {temperature, gasOverThreshold});
+                    turnOffAlarm()
+                }
             }
             
         })
@@ -62,8 +86,11 @@ const subscribeAdafruit = async(socketServer)=>{
                 gasOverThreshold = jsonData.data === "1"
                 if(gasOverThreshold){
                     const success = await turnOnAlarm(temperature, gasOverThreshold)
-                    if(success)
+                    if(success){
                         socketServer.emit("alarm", {temperature, gasOverThreshold});
+                        global.alarm = true
+                        turnOffAlarm()
+                    }
                 }    
             }
             else
