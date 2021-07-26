@@ -1,5 +1,5 @@
 const { Router} = require("express")
-const {protect} = require("../controllers/authController")
+const {protect, isLoggedIn} = require("../controllers/authController")
 const {postSpeakerData, postRelayData, postLCDData} = require("../utils/AdafruitIO")
 const router = Router();
 const {respondSuccess} = require("../utils/apiUtils")
@@ -7,7 +7,7 @@ const AppError = require("../utils/appError")
 const {addNewAlarm, Alarm} = require("../models/Models") 
 
 router.use(protect)
-
+router.use(isLoggedIn)
 router.post("/turn-on", (req, res, next)=>{
     const userEmail = res.locals.user.email;
     const {gas, temperature} = req.body
@@ -18,15 +18,15 @@ router.post("/turn-on", (req, res, next)=>{
     if(global.alarm)
         return next(new AppError("Alarm has already been turned on", 400))
 
-    const turnOnSpeaker = postSpeakerData(500)
-    const turnOnAlarm = postRelayData(true)
-    const showDangerMessage = postLCDData("Danger!!")
-    const turnOffSpeaker = postSpeakerData(0)
-    const turnOffAlarm = postRelayData(false)
-    const showMessage = postLCDData("Turned off")
-    const recordAlarm = addNewAlarm(userEmail, {gas, temperature})
+    // const turnOnSpeaker = postSpeakerData.bind({}, 500)
+    // const turnOnAlarm =  postRelayData.bind({}, true)
+    // const showDangerMessage =  postLCDData.bind({}, "Danger!!")
+    // const turnOffSpeaker =  postSpeakerData.bind({}, 0)
+    // const turnOffAlarm = postRelayData.bind({}, false)
+    // const showMessage = postLCDData.bind({}, "Turned off")
+    // const recordAlarm = addNewAlarm.bind({}, userEmail, {gas, temperature})
 
-    Promise.all([turnOnSpeaker, turnOnAlarm, showDangerMessage, recordAlarm])
+    Promise.all([postSpeakerData(500), postRelayData(true), postLCDData("Danger!"), addNewAlarm(userEmail, {gas, temperature})])
         .then((results)=>{
             console.log('results :>> ', results);
             if(results.reduce((acc, cur)=>acc&&cur)){
@@ -35,9 +35,10 @@ router.post("/turn-on", (req, res, next)=>{
                 // Turn off alarm after 5 minutes
                 setTimeout(()=>{
                     if(global.alarm){
-                        Promise.all([turnOffSpeaker, turnOffAlarm, showMessage])
-                            .then((results)=>{
-                                if(results.reduce((acc, cur)=>acc&&cur)){
+                        Promise.all([postSpeakerData(0), postRelayData(false), postLCDData("Turned off!")])
+                            .then((offResults)=>{
+                                console.log('offResults :>> ', offResults);
+                                if(offResults.reduce((acc, cur)=>acc&&cur)){
                                     global.alarm = false
                                 }                                
                             })
@@ -56,14 +57,14 @@ router.post("/turn-on", (req, res, next)=>{
 })
 
 router.post("/turn-off", (req, res, next)=>{
-    const turnOffSpeaker = postSpeakerData(0)
-    const turnOffAlarm = postRelayData(false)
-    const showMessage = postLCDData("Turned off")
+    // const turnOffSpeaker = postSpeakerData.bind({}, 0)
+    // const turnOffAlarm = postRelayData.bind({}, false)
+    // const showMessage = postLCDData.bind({}, "Turned off")
 
     if(!global.alarm)
         return next(new AppError("Alarm has already been turned off", 400))
 
-    Promise.all([turnOffSpeaker, turnOffAlarm, showMessage])
+    Promise.all([postSpeakerData(0), postRelayData(false), postLCDData("Turned off!")])
         .then((results)=>{
             if(results.reduce((acc, cur)=>acc&&cur)){
                 respondSuccess(res, 200, "Alarm has been turned off")

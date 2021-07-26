@@ -170,13 +170,6 @@ const getLastestData = async()=>{
     }
 }
 
-const turnOnSpeaker = postSpeakerData(500)
-const turnOnAlarm = postRelayData(true)
-const showDangerMessage = postLCDData("Danger!!")
-const turnOffSpeaker = postSpeakerData(0)
-const turnOffAlarm = postRelayData(false)
-const showMessage = postLCDData("Turned off")
 
 module.exports = {postLedData, postSpeakerData, postLCDData, postTempAndHumidData, 
-                 postGasData, postDRVData, postRelayData, getLastestData,
-                turnOffAlarm, turnOnAlarm, turnOnSpeaker, turnOffSpeaker, showDangerMessage, showMessage}
+                 postGasData, postDRVData, postRelayData, getLastestData}
